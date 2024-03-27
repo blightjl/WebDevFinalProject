@@ -4,17 +4,17 @@ import "../ColorScheme.css";
 
 function Register() {
     const handleLogin = () => {
-        alert("LOGIN.");
+        alert("LOGING IN");
     };
 
     const handleRegister = () => {
-        alert("REGISTER.");
+        alert("REGISTERED {added new user}");
     };
 
     return (
-        // the logo at the top right
+        // !NOTE: the UniSwap logo should collapse when it approaches the register box i.e. in screen size: xs, s, m
         <div>
-            <h1 className="adjustedFont uniswapLogo titleColor" style={{}}>UniSwap</h1>
+            <h1 className="adjustedFont uniswapLogo titleColor">UniSwap</h1>
             <form className="registerBox pinkBackgroundColor" onSubmit={handleLogin}>
             <h2 className="adjustedFont" style={{marginTop: "0px"}}>Register</h2>
             <div className="labelInput">
@@ -27,11 +27,11 @@ function Register() {
             </div>
             <div className="labelInput">
                 <strong className="adjustedFont">Password</strong><br/>
-                <input className="inputField" name="password"/>
+                <input className="inputField" name="password" type="password"/>
             </div>
             <div className="labelInput">
                 <strong className="adjustedFont">Repeat Password</strong><br/>
-                <input className="inputField" name="confirm-password"/>
+                <input className="inputField" name="confirm-password" type="password"/>
             </div>
             <div>
                 <button className="adjustedFont registerButton" type="button" onClick={handleRegister}><strong>REGISTER</strong></button>
