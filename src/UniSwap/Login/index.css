@@ -1,0 +1,53 @@
+/* !NOTE: have to refactor the css files eliminate redundancy */
+.registerBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #bcd2d0;
+    border-radius: 5px;
+    width: 170px;
+}
+
+.inputField {
+    height: 22px;
+    border: 1px solid #bcd2d0;
+    background-color: #f8dce4;
+    border: 2px solid #bcd2d0;
+    border-radius: 5px;
+}
+
+.labelInput {
+    padding-bottom: 10px;
+    align-items: left;
+}
+
+.submitButtonLGN {
+    height: 30px;
+    background-color: #d0d4fc;
+    border: 2px solid #92aaff;
+    border-radius: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.registerButtonLGN {
+    height: 30px;
+    margin-left: 1px;
+    background-color: #f89484;
+    border: 2px solid #fb7f6f;
+    border-radius: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.uniswapLogo {
+    margin-top: 0px;
+    font-size: 4em;
+    position: absolute;
+    right: 8%;
+    top: 3%;
+}
