@@ -1,4 +1,4 @@
-import { Route, Routes, Link } from "react-router-dom";
+import { Route, Routes, Link, redirect } from "react-router-dom";
 import "./index.css"
 import "../ColorScheme.css";
 
@@ -13,7 +13,7 @@ function Homepage() {
 
     return (
         // !NOTE: the UniSwap logo should collapse when it approaches the register box i.e. in screen size: xs, s, m
-        <div>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: '100vh' }}>
             <h1 className="adjustedFont uniswapLogo titleColor">UniSwap</h1>
             <form className="registerBox pinkBackgroundColor" onSubmit={handleRegister}>
             <h2 className="adjustedFont" style={{marginTop: "0px"}}>Login</h2>
