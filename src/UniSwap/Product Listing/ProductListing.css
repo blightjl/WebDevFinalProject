@@ -1,0 +1,22 @@
+.seller-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.similar-items-container {
+    width: 230px;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.buy-product-button {
+    width: 220px;
+    height: 60px;
+    background-color: #DCA4FF;
+    border: 2px solid #D287FF;
+    display: flex;
+    align-items: center;
+}
