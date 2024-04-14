@@ -1,0 +1,8 @@
+.response-container {
+    width: 1100px;
+    min-height: 500px;
+    background-color: #D9D9D9;
+    border: 2px solid #FF7B87;
+    border-radius: 20px;
+    padding: 10px;
+}

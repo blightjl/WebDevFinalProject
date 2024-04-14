@@ -1,3 +1,4 @@
+import ProductComment from "./ProductComment";
 import { ProductType } from "./ProductType";
 
 export default interface Product {
@@ -7,4 +8,6 @@ export default interface Product {
     title: string;
     price: string;
     type: ProductType;
+    id: number;
+    comments: ProductComment[];
 }
