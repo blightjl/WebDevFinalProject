@@ -1,0 +1,48 @@
+.edit-profile-modal {
+    background-color: #ffffff;
+    border: 2px solid #B3B3B3;
+    border-radius: 16px;
+    padding: 20px;
+    width: 400px;
+    margin: 50px auto;
+  }
+  
+  .edit-profile-modal h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid #B3B3B3;
+    margin-top: 5px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .cancel-button {
+    background-color: #D0B783;
+    color: #ffffff;
+    margin-right: 10px;
+  }
+  
+  .save-button {
+    background-color: #E5C3C6;
+    color: #ffffff;
+  }
