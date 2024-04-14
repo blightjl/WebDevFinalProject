@@ -9,11 +9,14 @@ import './App.css';
 import BuyerProfile from './UniSwap/BuyerProfile';
 import SellerProfile from './UniSwap/SellerProfile';
 import EditProfile from './UniSwap/ProfileEdit';
+import SearchPage from './UniSwap/Search/SearchPage';
+import Homepage from './UniSwap/Homepage/index';
+import ProductListing from './UniSwap/Product Listing/ProductListing';
 
 function App() {
   return (
     <HashRouter>
-      <div className="backgroundColor" style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+      {/* <div className="backgroundColor" style={{display: "flex", alignItems: "center", justifyContent: "center", alignItems: 'flex-'}}> */}
         <Routes>
           {/* <Route path="/" element={<Register/>}/> */}
           {/* <Route path="/" element={<Login/>}/> */}
@@ -27,8 +30,13 @@ function App() {
           } }/>}/> */}
 
 
+          <Route path="/home" element={<Homepage />} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="/" element={<Login />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/product" element={<ProductListing />} />
         </Routes>
-      </div>
+      {/* </div> */}
     </HashRouter>
   );
 }
