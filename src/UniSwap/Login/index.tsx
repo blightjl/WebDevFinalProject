@@ -1,33 +1,51 @@
-import { Route, Routes, Link, redirect } from "react-router-dom";
+import React, { useState } from "react";
+import { Route, Routes, Link, redirect, useNavigate } from "react-router-dom";
+import { Account } from "../Account/client";
+import * as client from "../Account/client";
 import "./index.css"
 import "../ColorScheme.css";
 
 function Homepage() {
-    const handleSubmit = () => {
-        alert("SUBMITTED!");
+    const [credentials, setCredentials] = useState<Account>({ _id: "",
+        username: "",
+        email: "",
+        password: "",
+        repeat: "",
+        accountType: ""
+    });
+
+    const navigate = useNavigate();
+
+    const login = async () => {
+        // alert(credentials);
+        // console.log(credentials);
+        await client.login(credentials);
+        navigate("/home");
     };
 
-    const handleRegister = () => {
-        alert("LOADING REGISTER PAGE");
+    const navToRegister = () => {
+        navigate("/register");
     };
 
     return (
         // !NOTE: the UniSwap logo should collapse when it approaches the register box i.e. in screen size: xs, s, m
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: '100vh' }}>
             <h1 className="adjustedFont uniswapLogo titleColor">UniSwap</h1>
-            <form className="registerBox pinkBackgroundColor" onSubmit={handleRegister}>
+            <form className="registerBox pinkBackgroundColor" onSubmit={login}>
             <h2 className="adjustedFont" style={{marginTop: "0px"}}>Login</h2>
             <div className="labelInput">
-                <strong className="adjustedFont">Username/Email</strong><br/>
-                <input className="inputField" name="user"/>
+                <strong className="adjustedFont">Username</strong><br/>
+                <input className="inputField" name="user" value={credentials.username} 
+                    onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}/>
             </div>
             <div className="labelInput">
                 <strong className="adjustedFont">Password</strong><br/>
-                <input className="inputField" name="password" type="password"/>
+                <input className="inputField" name="password" type="password" value={credentials.password} 
+                    onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}/>
             </div>
             <div>
-                <button className="adjustedFont submitButtonLGN" type="button" onClick={handleSubmit}><strong>SUBMIT</strong></button>
-                <button className="adjustedFont registerButtonLGN" type="submit"><strong>REGISTER</strong></button>
+                <button className="adjustedFont submitButtonLGN" type="submit"><strong>SUBMIT</strong></button>
+                <button className="adjustedFont registerButtonLGN" type="button"  onClick={navToRegister}><strong>REGISTER</strong></button>
             </div>
             </form>
             {/* should be scalable */}
