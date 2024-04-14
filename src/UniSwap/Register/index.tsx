@@ -6,8 +6,8 @@ import "../ColorScheme.css";
 
 function Register() {
     const [error, setError] = useState("");
-    const [account, setAccount] = useState({ username: "", email: "", 
-        password: "", repeat: ""
+    const [account, setAccount] = useState({ _id: "", username: "", email: "", 
+        password: "", repeat: "", accountType: "USER"
     });
     const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ function Register() {
 
     const register = async () => {
         try {
+            console.log(account);
             await client.register(account);
             navigate("/home");
         } catch (err) {
@@ -59,6 +60,7 @@ function Register() {
                 <button className="adjustedFont loginButton" type="submit"><strong>LOG IN</strong></button>
             </div>
             </form>
+            <br/>
             {error && <div>{error}</div>}
         </div>
     );

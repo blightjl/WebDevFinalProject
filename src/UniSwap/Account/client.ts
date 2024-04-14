@@ -11,8 +11,8 @@ export interface Account {
     accountType: string;
 };
 
-export const register = async (account: any) => {
-    const response = await axios.post(`${ACCOUNTS_API}}/register`, account);
+export const register = async (account: Account) => {
+    const response = await axios.post(`${ACCOUNTS_API}/register`, account);
     return response.data;
 };
 
@@ -20,3 +20,13 @@ export const login = async (credentials: Account) => {
     const response = await axios.post(`${ACCOUNTS_API}/login`, credentials);
     return response.data;
 };
+
+export const home = async () => {
+    const response = await axios.post(`${ACCOUNTS_API}/home`);
+    return response.data;
+};
+
+export const findAllAccounts = async () => {
+    const response = await axios.get(`${ACCOUNTS_API}`);
+    return response.data;
+}

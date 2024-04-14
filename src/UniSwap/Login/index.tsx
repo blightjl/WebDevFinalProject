@@ -11,7 +11,7 @@ function Homepage() {
         email: "",
         password: "",
         repeat: "",
-        accountType: ""
+        accountType: "ANON"
     });
 
     const navigate = useNavigate();
@@ -19,8 +19,14 @@ function Homepage() {
     const login = async () => {
         // alert(credentials);
         // console.log(credentials);
-        await client.login(credentials);
-        navigate("/home");
+        try {
+            await client.login(credentials);
+            console.log("LOGGING IN!");
+            navigate("/home");
+        } catch (error) {
+            console.log(error);
+            // alert(error);
+        }
     };
 
     const navToRegister = () => {
