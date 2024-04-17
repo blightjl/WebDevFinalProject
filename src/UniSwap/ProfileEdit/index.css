@@ -20,8 +20,7 @@
     font-weight: bold;
   }
   
-  input[type="text"],
-  textarea {
+  .textarea {
     width: 100%;
     padding: 8px;
     border-radius: 5px;

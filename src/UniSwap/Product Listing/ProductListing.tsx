@@ -46,9 +46,10 @@ export default function ProductListing(
   };
   let placeholderSimilarProduct: Product[] = [placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct];
 
-  return (
+  return( 
+    <>
+    <Header />
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Header />
       <div className="product-container">
         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 20, marginRight: 20}}>
           <img className="product-listing-image" src={placeholderProduct.image}/>
@@ -87,5 +88,6 @@ export default function ProductListing(
       <ResponseSection comments={placeholderProduct.comments}/>
       <br />
     </div>
-  )
+    </>
+  );
 }

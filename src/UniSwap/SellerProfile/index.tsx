@@ -1,16 +1,34 @@
-import { CiShop } from 'react-icons/ci';
 import { FaEdit } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-
-
-import "./index.css"
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "../ColorScheme.css";
-import { SetStateAction, useState } from "react";
+import "./index.css"
+import { SetStateAction, useEffect, useState } from "react";
 import { Product } from "./product";
 import ProductListingTile from "./ProductListingTile";
+import Header from '../Components/Header';
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalBody,
+    useDisclosure
+  } from '@chakra-ui/react'
+import EditProfile from "../ProfileEdit";
 
 function SellerProfile() {
     // const [savedProducts, setSavedProducts] = useState<Product[]>([]);
+    
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [user, setUser] = useState<Product>();
+
+    useEffect(()=> {
+        const userID = searchParams.get('userID');
+        
+        // grab product from DB using ID and set it to product
+        // setUser();
+    }, [])
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const [profileInfo, setProfileInfo] = useState({
         name: "John Doe",
         bio: "Hi, I’m a seller. I love selling things! Things such as shoes, shirts, and pants.",
@@ -31,81 +49,41 @@ function SellerProfile() {
 
     return (
         // !NOTE: the UniSwap logo should collapse when it approaches the register box i.e. in screen size: xs, s, m
-        <div className="headerContainer">
-            <button className="circularPinkButton">
-                <CiShop className="bigger-icon" />
-            </button>
-            <button className="profileButton">
-                <h1 className="adjustedFont profile titleColor">Profile</h1>
-            </button>
-            <input type="text" placeholder="Search For a Product..." className="searchBar" />
-            <h1 className="adjustedFont uniswapLogo titleColor">UniSwap</h1>
-
-
-
-            {/* <div className="profile-icon-wrapper">
-                <div className="profile-icon">
-                    <img
-                        src="https://example.com/profile-image.jpg"
-                        alt="Profile"
-                        className="profile-image"
-                    />
-                    <div className="edit-icon">
-                        <FaEdit className="edit-button" />
-                    </div>
-                </div>
-
+        <>
+            <Header /> 
+            <div className="profile-icon">
+                <img
+                    src={profileInfo.profilePicture}
+                    alt="Profile"
+                    className="profile-image"
+                />
+                <FaEdit 
+                    className="edit-icon edit-button"
+                    onClick={onOpen}    
+                />
             </div>
-            <div className="text-area-wrapper">
-                <p
-                    className="transparent-textarea"
-
-                > Hi I’m seller, I love seller things! Things such as shoes, shirts, and pants. This is my profile where I can view things that I want to sell! If I click on one of the product listings it takes me to the product page.</p>
-            </div> */}
-
-
-            <div className="profile-icon-wrapper">
-                <div className="profile-icon">
-                    <img
-                        src={profileInfo.profilePicture}
-                        alt="Profile"
-                        className="profile-image"
-                    />
-                    <Link to="../../ProfileEdit/index.tsx" 
-                    className="edit-icon">
-                        <FaEdit className="edit-button" />
-                    </Link>
-                </div>
-            </div>
-
-
-            <div className="text-area-wrapper">
-
-                <p className="transparent-textarea">
-                    <h2 className="profile-name adjustedFont">{profileInfo.name}</h2>
-                    {profileInfo.bio}
-                </p>
-            </div>
-
-
-
+            <p className="transparent-textarea">
+                <h2 className="profile-name adjustedFont">{profileInfo.name}</h2>
+                {profileInfo.bio}
+            </p>
             <div className="products-wrapper">
                 <div> <h1 className="adjustedFont" style={{ color: 'grey' }}>Product Listing</h1>
-                    <div className="products-container" style={{ backgroundColor: '#D0B783', padding: '20px' }}>
+                    <div className="products-container-profile">
                         {savedProducts.map((product, index) => (
                             <ProductListingTile product={product} key={index} />
                         ))}
                     </div>
                 </div>
             </div>
-
-
-        </div>
-
-
-
-
-
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalBody>
+                        <EditProfile onClose={onClose} />
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
+        </>
     );
 }
 

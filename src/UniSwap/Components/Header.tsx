@@ -16,13 +16,18 @@ export default function Header(
     </Link>
   );
 
-  const AccountButton = ( // TODO get user ID  
-    <Link to="/account?userID=">
+  const AccountButton = () => { 
+    // TODO get user ID
+    let userID = 1
+    // TODO get if user is buyer or seller
+    let buyerOrSeller = 'seller-profile'
+    return(
+    <Link to={`/${buyerOrSeller}?userID=${userID}`}>
       <div className="account-button">
         <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>Account</h2>
       </div>
-    </Link>
-  )
+    </Link>)
+  };
   
   const SearchBar = (
     <div>
@@ -39,7 +44,7 @@ export default function Header(
   return(
     <div className="row" style={{ alignItems: 'center' }}>
       {HomeIcon}
-      {AccountButton}
+      <AccountButton />
       {SearchBar}
       <h3 className="adjustedFont uniswapLogoMini titleColor">UniSwap</h3>
     </div>
