@@ -29,7 +29,7 @@ function EditProfile(
   };
 
   return (
-    <div className="edit-profile-modal">
+    <div className="edit-profile-modal adjustedFont">
       <ModalCloseButton />
       <h2>Edit Profile</h2>
       <form onSubmit={handleSave}>
@@ -48,6 +48,7 @@ function EditProfile(
           <textarea
             id="bio"
             value={bio}
+            className="textarea"
             onChange={(e) => setBio(e.target.value)}
           ></textarea>
         </div>

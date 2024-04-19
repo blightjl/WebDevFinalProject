@@ -6,8 +6,7 @@ import Register from './UniSwap/Register';
 import Login from './UniSwap/Login'
 import "./UniSwap/ColorScheme.css";
 import './App.css';
-import BuyerProfile from './UniSwap/BuyerProfile';
-import SellerProfile from './UniSwap/SellerProfile';
+import ProfilePage from './UniSwap/Profile';
 import EditProfile from './UniSwap/ProfileEdit';
 import SearchPage from './UniSwap/Search/SearchPage';
 import Homepage from './UniSwap/Homepage/index';
@@ -21,8 +20,7 @@ function App() {
       <HashRouter>
         {/* <div className="backgroundColor" style={{display: "flex", alignItems: "center", justifyContent: "center", alignItems: 'flex-'}}> */}
           <Routes>
-            <Route path="/buyer-profile/*" element={<BuyerProfile/>}/>
-            <Route path="/seller-profile/*" element={<SellerProfile/>}/>
+            <Route path="/profile/*" element={<ProfilePage/>}/>
             <Route path="/home" element={<Homepage />} />
             <Route path="/register" element={<Register/>} />
             <Route path="/" element={<Login />} />
