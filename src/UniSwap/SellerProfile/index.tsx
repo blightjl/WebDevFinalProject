@@ -50,31 +50,37 @@ function SellerProfile() {
     return (
         // !NOTE: the UniSwap logo should collapse when it approaches the register box i.e. in screen size: xs, s, m
         <>
-            <Header /> 
-            <div className="profile-icon">
-                <img
-                    src={profileInfo.profilePicture}
-                    alt="Profile"
-                    className="profile-image"
-                />
-                <FaEdit 
-                    className="edit-icon edit-button"
-                    onClick={onOpen}    
-                />
-            </div>
-            <p className="transparent-textarea">
-                <h2 className="profile-name adjustedFont">{profileInfo.name}</h2>
-                {profileInfo.bio}
-            </p>
-            <div className="products-wrapper">
-                <div> <h1 className="adjustedFont" style={{ color: 'grey' }}>Product Listing</h1>
-                    <div className="products-container-profile">
-                        {savedProducts.map((product, index) => (
-                            <ProductListingTile product={product} key={index} />
-                        ))}
+            <Header />
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div className="profile-icon">
+                            <img
+                                src={profileInfo.profilePicture}
+                                alt="Profile"
+                                className="profile-image"
+                            />
+                            <FaEdit 
+                                className="edit-icon edit-button"
+                                onClick={onOpen}    
+                            />
+                        </div>
+                        <h1 className="adjustedFont" style={{ width: 'fit-content', marginTop: 5, fontSize: '1.7rem' }}>{profileInfo.name}</h1>
+                    </div>
+                    <p className="transparent-textarea adjustedFont">
+                        {profileInfo.bio}
+                    </p>
+                </div>
+                <div className="products-wrapper">
+                    <div> <h1 className="adjustedFont" style={{ color: 'grey' }}>Product Listings</h1>
+                        <div className="products-container-profile">
+                            {savedProducts.map((product, index) => (
+                                <ProductListingTile product={product} key={index} />
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div> 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>

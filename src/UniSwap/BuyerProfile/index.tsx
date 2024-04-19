@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Route, Routes, Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CiShop } from 'react-icons/ci';
 import { FaEdit } from "react-icons/fa";
-import "./index.css"
 import "../ColorScheme.css";
 import { SetStateAction, useState } from "react";
 import { Product } from "./product";
