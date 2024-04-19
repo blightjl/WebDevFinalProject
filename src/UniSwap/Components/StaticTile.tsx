@@ -2,18 +2,19 @@ import React from "react";
 import './Tile.css';
 
 export default function StaticTile(
-  {
-    title,
-    price,
-    image,
-    size,
-  } : {
-    title: string;
-    price: string;
-    image: any;
-    size?: string;
-  }
+{
+  title,
+  price,
+  image,
+  size,
+} : {
+  title: string;
+  price: string;
+  image: any;
+  size?: string;
+}
 ) {
+
   return(
     <div 
       className={`static-tile-container-${size}`}
@@ -21,8 +22,8 @@ export default function StaticTile(
       <img src={image} className={`interactable-tile-image-${size}`} />
       {size !== 'sm' &&
         <>
-        <h3 className="adjustedFont">{title}</h3>
-        <h4 className="adjustedFont">{`${price}$`}</h4>  
+        <p style={{ fontSize: '2rem' }} className="adjustedFont">{title}</p>
+        <p style={{ fontSize: '2rem' }} className="adjustedFont">{`${price}$`}</p>  
         </>
       }
     </div>

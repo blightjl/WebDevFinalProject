@@ -1,6 +1,6 @@
 .seller-image {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
 }
 
@@ -23,22 +23,26 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .product-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    flex-wrap: wrap;
     background-color: #E5C3C6;
     border: 2px solid #FF7B87;
     border-radius: 20px;
-    width: 1100px;
-    height: 600px;
+    width: 70%;
+    height: fit-content;
+    margin: 10px;
 }
 
 .product-listing-image {
-    width: 763px;
-    height: 375px;
+    width: 100%;
+    height: auto;
+    max-height: 375px;
     border-radius: 20px;
 }
 
@@ -57,5 +61,8 @@
 }
 
 .product-description-long {
-    width: 763px;
+    width: auto;
+    max-width: 763px;
+    text-align: center;
+    margin-bottom: 10px;
 }

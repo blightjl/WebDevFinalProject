@@ -1,5 +1,5 @@
 import { FaEdit } from "react-icons/fa";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import "../ColorScheme.css";
 import "./index.css"
 import { SetStateAction, useEffect, useState } from "react";
@@ -37,12 +37,6 @@ function ProfilePage() {
     profilePicture: "https://example.com/profile-image.jpg",
     profileType: 'Seller',
   });
-  const navigate = useNavigate();
-
-  const handleProfileUpdate = (updatedInfo: SetStateAction<profile>) => {
-    setUser(updatedInfo);
-    navigate('/seller/profile'); // Navigate back to the SellerProfile page after updating
-  };
 
   return (
     <div style={{ height: '100vh' }}>

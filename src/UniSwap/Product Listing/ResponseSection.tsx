@@ -26,7 +26,8 @@ const handleCommentClick = (commentID: Number) => {
             display: 'flex',
             justifyContent: 'flex-start',
             flexDirection: 'column'
-            }}
+          }}
+          key={index}
         >
           <p className='adjustedFont' style={{ fontSize: '.5rem' }}>{`${comment.userName} says...`}</p>
           <span style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start' }}>
