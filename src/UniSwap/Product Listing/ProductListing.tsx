@@ -3,7 +3,7 @@ import Product from "../Types/Product";
 import "./ProductListing.css";
 import "../ColorScheme.css";
 import { useSearchParams } from "react-router-dom";
-import { SellerProfile } from "../Types/SellerProfile";
+import profile from "../Types/Profile";
 import StaticTile from "../Components/StaticTile";
 import marketplaceIcon from '../Images/marketplace_icon.png';
 import ResponseSection from "./ResponseSection";
@@ -38,17 +38,19 @@ export default function ProductListing(
     id: 1,
     comments: [placeholderComment, placeholderComment, placeholderComment]
   };
-  let placeholderSeller: SellerProfile = {
+  let placeholderSeller: profile = {
     name: "Placeholder name",
-    profile_img: marketplaceIcon,
-    product_listings: [placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct],
-    description: "I love to sell things",
+    profilePicture: marketplaceIcon,
+    products: [placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct],
+    bio: "I love to sell things",
+    profileType: 'Seller'
   };
   let placeholderSimilarProduct: Product[] = [placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct];
 
-  return (
+  return( 
+    <>
+    <Header />
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Header />
       <div className="product-container">
         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 20, marginRight: 20}}>
           <img className="product-listing-image" src={placeholderProduct.image}/>
@@ -87,5 +89,6 @@ export default function ProductListing(
       <ResponseSection comments={placeholderProduct.comments}/>
       <br />
     </div>
-  )
+    </>
+  );
 }
