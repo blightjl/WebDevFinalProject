@@ -1,0 +1,30 @@
+.uniswapLogo {
+    margin-top: 0px;
+    font-size: 4em;
+    position: absolute;
+    right: 8%;
+    top: 3%;
+}
+
+.products-container {
+    display: 'flex';
+    flex-direction: 'column';
+    justify-content: 'center'; 
+    width: 936px;
+}
+
+.homelistings {
+    color: #f96161;
+}
+
+.centerForHome {
+    display: flex;
+    justify-content: center;
+}
+
+.listOfItems {
+    height: 300px;
+    width: 100%;
+    background-color: #f96161;
+    padding-bottom: 50px;
+}

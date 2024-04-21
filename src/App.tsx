@@ -9,7 +9,7 @@ import './App.css';
 import ProfilePage from './UniSwap/Profile';
 import EditProfile from './UniSwap/ProfileEdit';
 import SearchPage from './UniSwap/Search/SearchPage';
-import Homepage from './UniSwap/Homepage/index';
+import Homepage from './UniSwap/Homepage/home';
 import ProductListing from './UniSwap/Product Listing/ProductListing';
 import { ChakraProvider } from '@chakra-ui/react'
 
