@@ -2,7 +2,7 @@ import Header from "../Components/Header";
 import Product from "../Types/Product";
 import "./ProductListing.css";
 import "../ColorScheme.css";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import profile from "../Types/Profile";
 import StaticTile from "../Components/StaticTile";
 import marketplaceIcon from '../Images/marketplace_icon.png';
@@ -13,12 +13,11 @@ import { useEffect, useState } from "react";
 export default function ProductListing(
 ) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [product, setProduct] = useState<Product>();
-
+  const profileName = searchParams.get('productName');
+  
   useEffect(()=> {
-    const productID = searchParams.get('productID');
-    
     // grab product from DB using ID and set it to product
+    // if there are multiple products then send to the search page
     // setProduct();
   }, [])
   let placeholderComment: ProductComment = {
@@ -32,12 +31,13 @@ export default function ProductListing(
     image: marketplaceIcon,
     description_short: "This is a short description",
     description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
-    title: "Placeholder Product",
+    title: "Item Name",
     price: "500$",
     type: "Shoes",
     id: 1,
     comments: [placeholderComment, placeholderComment, placeholderComment]
   };
+  console.log(placeholderProduct.title)
   let placeholderSeller: profile = {
     name: "Placeholder name",
     profilePicture: marketplaceIcon,
@@ -60,12 +60,14 @@ export default function ProductListing(
           </p>
         </div>
         <div className="adjustedFont product-info-section">
-          <h1>{`${placeholderProduct.price}$`}</h1>
+          <h1 style={{ fontSize: '1rem', textWrap: 'wrap' }}>{`${placeholderProduct.title}`}</h1>
+          <h1 style={{ fontSize: '2rem' }}>{`${placeholderProduct.price}$`}</h1>
           <h4 className="seller-profile-small">
             {placeholderSeller.name} <img src={placeholderProduct.image} className='seller-image' />
           </h4>
           <br />
-          <h4 style={{ margin: 0 }}>Product Type: {placeholderProduct.type}</h4>
+          <h4 style={{ margin: 0, fontSize: '.7rem' }}>Product Type: {placeholderProduct.type}</h4>
+          <br />
           <p>Similar Products</p>
           <div className="similar-items-container">
             {placeholderSimilarProduct.map((product, index) => (

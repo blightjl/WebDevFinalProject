@@ -1,5 +1,6 @@
 .response-container {
-    width: 1100px;
+    /* width: 1100px; */
+    width: 80%;
     min-height: 500px;
     background-color: #D9D9D9;
     border: 2px solid #FF7B87;

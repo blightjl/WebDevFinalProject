@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./Header.css";
 import marketPlace from "../Images/marketplace_icon.png";
 import mag_glass from "../Images/magnifying_glass_icon.png";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function Header(
 ) {
   const [width, setWidth] = useState(window.innerWidth);
+  const navigate = useNavigate();
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
@@ -32,15 +33,18 @@ export default function Header(
   const AccountButton = () => { 
     // TODO get user ID
     let userID = 1
-    // TODO get if user is buyer or seller
-    let buyerOrSeller = 'seller-profile'
     return(
-    <Link to={`/${buyerOrSeller}?userID=${userID}`}>
+    <Link to={`/profile/?userID=${userID}`}>
       <div className="account-button">
         <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>Account</h2>
       </div>
     </Link>)
   };
+  
+
+  const onSubmit = (value: string) => {
+    navigate(`/product/?productName=${value}`)
+  }
   
   const SearchBar = (
     <div>
@@ -48,11 +52,17 @@ export default function Header(
         className="searchbar" 
         type="text" 
         id="searchBar" 
-        placeholder={"Search for a Product..."} 
-        // defaultValue={searchParams}
+        placeholder="Search for a Product..." 
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            const target = e.target as HTMLInputElement;
+            onSubmit(target.value);
+          }
+        }}
       />
+      {/* <button onClick={() => onSubmit((document.getElementById('searchBar') as HTMLInputElement)?.value || '')}>Search</button> */}
     </div>
-  )
+  );
 
   return(
     <div className="row" style={{ alignItems: 'center', flexWrap:'nowrap', height: 96 }}>
