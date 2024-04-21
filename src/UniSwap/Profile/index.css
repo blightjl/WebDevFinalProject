@@ -1,0 +1,125 @@
+.uniswapLogo {
+    margin-top: 0px;
+    font-size: 4em;
+    right: 8%;
+    top: 3%;
+}
+
+.bigger-icon {
+    font-size: 60px;
+    color: #EA929A;
+}
+
+.profileButton {
+    border-radius: 16px;
+    width: 140px;
+    height: 50px;
+    background-color: #D0B783;
+    border: 2px solid #B99D61;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.profile {
+    margin-top: 0px;
+    font-size: 2em;
+    right: 8%;
+    top: 3%;
+}
+
+.products-container-profile {
+    display: flex;
+    justify-content: space-between;
+    width: 70vw;
+    height: 25vh;
+    background-color: #D0B783;
+    border: 2px solid #A2906A;
+    border-radius: 15px;
+}
+
+.products-wrapper {
+    position: relative;
+    display: flex;
+    padding: 20px;
+    margin-left: 90px;
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    /* or absolute depending on your layout */
+    top: 0;
+    left: 0;
+}
+
+
+
+/* decprition css */
+.text-area-wrapper {
+    margin-top: 20px;
+}
+
+.profileBio {
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    color: #6F6F6F;
+    font-size: 1.1rem;
+    width: 516px;
+    height: 260px;
+}
+
+
+
+
+
+/* profile css */
+.profile-icon {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #B3B3B3;
+    width: 245px;
+    height: 245px;
+    border-radius: 50%;
+}
+
+.profile-icon:hover .edit-icon {
+    opacity: 1;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.edit-icon:hover {
+    opacity: 1;
+}
+
+.edit-button {
+    color: #000;
+    background-color: transparent;
+    width: 25px;
+    align-self: center;
+    border-radius: 0px;
+}

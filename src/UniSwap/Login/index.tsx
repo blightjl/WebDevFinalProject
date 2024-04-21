@@ -11,16 +11,17 @@ function Homepage() {
         email: "",
         password: "",
         repeat: "",
-        accountType: "ANON"
+        accountType: "USER"
     });
 
     const navigate = useNavigate();
 
-    const login = async () => {
-        // alert(credentials);
-        // console.log(credentials);
+    const login = async (event : any) => {
+        event.preventDefault();
         try {
+            console.log(" YOU ARE NOW LOGGING IN...")
             await client.login(credentials);
+            // console.log(response)
             console.log("LOGGING IN!");
             navigate("/home");
         } catch (error) {
