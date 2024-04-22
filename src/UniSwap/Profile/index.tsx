@@ -65,9 +65,9 @@ function ProfilePage() {
           <div className="products-wrapper">
               <div> <h1 className="adjustedFont" style={{ color: 'grey' }}>{user.profileType === 'Seller' ?  'Product Listings' : 'Bookmarked Products'}</h1>
                   <div className="products-container-profile">
-                      {savedProducts.map((product, index) => (
+                      {savedProducts.length > 0 ? savedProducts.map((product, index) => (
                         <ProductListingTile product={product} key={index} />
-                      ))}
+                      )) : <p>No Comments</p>}
                   </div>
               </div>
           </div>

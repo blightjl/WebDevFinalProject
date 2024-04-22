@@ -9,25 +9,13 @@ import marketplaceIcon from '../Images/marketplace_icon.png';
 import ResponseSection from "./ResponseSection";
 import ProductComment from '../Types/ProductComment';
 import { useEffect, useState } from "react";
+import * as productClient from '../Types/productClient';
+import * as accountClient from '../Account/client';
 
 export default function ProductListing(
 ) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const profileName = searchParams.get('productName');
-  
-  useEffect(()=> {
-    // grab product from DB using ID and set it to product
-    // if there are multiple products then send to the search page
-    // setProduct();
-  }, [])
-  let placeholderComment: ProductComment = {
-    commentID: 1,
-    userID: 2,
-    userName: 'Buyer Person',
-    description: 'I HATE THIS PRODUCT',
-    likes: 2,
-  }
-  let placeholderProduct: Product = {
+
+  const [product, setProduct] = useState<Product>({
     image: marketplaceIcon,
     description_short: "This is a short description",
     description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
@@ -35,17 +23,33 @@ export default function ProductListing(
     price: "500$",
     type: "Shoes",
     id: 1,
-    comments: [placeholderComment, placeholderComment, placeholderComment]
-  };
-  console.log(placeholderProduct.title)
-  let placeholderSeller: profile = {
+    comments: [],
+  });
+  const [seller, setSeller] = useState<profile>({
     name: "Placeholder name",
-    profilePicture: marketplaceIcon,
-    products: [placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct],
+    profilePicture: undefined,
+    products: [],
     bio: "I love to sell things",
     profileType: 'Seller'
-  };
-  let placeholderSimilarProduct: Product[] = [placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct];
+  });
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  useEffect(()=> {
+    const fetchProduct = async () => {
+      const searchedProduct = searchParams.get('productName');
+      const product = await productClient.findProductByName(searchedProduct!);
+      setProduct(product);
+    }
+    fetchProduct();
+
+    const fetchUser = async () => {
+      const seller = product.id;
+      const sellerData = await accountClient.findUserById(`${seller}`);
+      setSeller(sellerData);
+    }
+    fetchUser();
+  }, []);
+  // let placeholderSimilarProduct: Product[] = [placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct];
 
   return( 
     <>
@@ -53,24 +57,25 @@ export default function ProductListing(
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div className="product-container">
         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 20, marginRight: 20}}>
-          <img className="product-listing-image" src={placeholderProduct.image}/>
+          <img className="product-listing-image" src={product.image}/>
           <br />
           <p className="adjustedFont product-description-long">
-            {placeholderProduct.description_long || placeholderProduct.description_short}
+            {product.description_long || product.description_short}
           </p>
         </div>
         <div className="adjustedFont product-info-section">
-          <h1 style={{ fontSize: '1rem', textWrap: 'wrap' }}>{`${placeholderProduct.title}`}</h1>
-          <h1 style={{ fontSize: '2rem' }}>{`${placeholderProduct.price}$`}</h1>
+          <h1 style={{ fontSize: '1rem', textWrap: 'wrap' }}>{`${product.title}`}</h1>
+          <h1 style={{ fontSize: '2rem' }}>{`${product.price}$`}</h1>
           <h4 className="seller-profile-small">
-            {placeholderSeller.name} <img src={placeholderProduct.image} className='seller-image' />
+            {seller.name} <img src={seller.profilePicture} className='seller-image' />
           </h4>
           <br />
-          <h4 style={{ margin: 0, fontSize: '.7rem' }}>Product Type: {placeholderProduct.type}</h4>
+          <h4 style={{ margin: 0, fontSize: '.7rem' }}>Product Type: {product.type}</h4>
           <br />
           <p>Similar Products</p>
-          <div className="similar-items-container">
-            {placeholderSimilarProduct.map((product, index) => (
+          {/* TODO switch to youtube video */}
+          {/* <div className="similar-items-container">
+            {simaler.map((product, index) => (
               <StaticTile
                 title={product.title}
                 price={product.price}
@@ -79,7 +84,7 @@ export default function ProductListing(
                 size='sm'    
               />
             ))}
-          </div>
+          </div> */}
           <div className="buy-product-button">
             <h3>Buy Product</h3>
           </div>
@@ -88,7 +93,7 @@ export default function ProductListing(
       <br />
       <br />
       <br />
-      <ResponseSection comments={placeholderProduct.comments}/>
+      <ResponseSection comments={product.comments}/>
       <br />
     </div>
     </>

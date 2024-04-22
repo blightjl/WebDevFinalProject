@@ -30,3 +30,8 @@ export const findAllAccounts = async () => {
     const response = await axios.get(`${ACCOUNTS_API}`);
     return response.data;
 }
+
+export const findUserById = async (userId: String) => {
+    const response = await axios.get(`${ACCOUNTS_API}/${userId}`);
+    return response.data;
+}

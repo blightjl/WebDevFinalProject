@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./Header.css";
 import marketPlace from "../Images/marketplace_icon.png";
-import mag_glass from "../Images/magnifying_glass_icon.png";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import * as client from '../Account/client';
 
 export default function Header(
 ) {
   const [width, setWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
+  const [userId, setUserId] = useState(1);
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
     };
-  
     window.addEventListener('resize', handleResize);
-  
+
+    const getClient = async () => {
+      const user = await client.home();
+      setUserId(user);
+    }
+  getClient();
+
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -25,16 +31,14 @@ export default function Header(
       <div 
         className="home-icon"
       >
-        <img src={marketPlace} className="home-icon-image"/>
+        <img alt='home icon' src={marketPlace} className="home-icon-image"/>
       </div>
     </Link>
   );
 
   const AccountButton = () => { 
-    // TODO get user ID
-    let userID = 1
     return(
-    <Link to={`/profile/?userID=${userID}`}>
+    <Link to={`/profile/?userID=${userId}`}>
       <div className="account-button">
         <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>Account</h2>
       </div>
