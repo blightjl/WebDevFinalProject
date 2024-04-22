@@ -8,6 +8,6 @@ export default interface Product {
     title: string;
     price: string;
     type: ProductType;
-    id: number;
+    id: number; // Seller ID
     comments: ProductComment[];
 }
