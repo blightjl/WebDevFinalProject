@@ -22,7 +22,7 @@ export const login = async (credentials: Account) => {
 };
 
 export const home = async () => {
-    const response = await axios.post(`${ACCOUNTS_API}/home`);
+    const response = await axios.get(`${ACCOUNTS_API}`);
     return response.data;
 };
 

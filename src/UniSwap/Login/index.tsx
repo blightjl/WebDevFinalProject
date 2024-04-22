@@ -26,6 +26,7 @@ function Homepage() {
             navigate("/home");
         } catch (error) {
             console.log(error);
+            console.log("FAILED LOGGING IN LMAO");
             // alert(error);
         }
     };
