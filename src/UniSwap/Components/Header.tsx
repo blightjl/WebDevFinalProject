@@ -50,7 +50,7 @@ export default function Header(
   );
 
   const AccountButton = (
-    <Link to={`/profile/?profileId=${user._id}`}>
+    <Link to={user._id === 1 ? '/login' : `/profile/?profileId=${user._id}`}>
       <div className="account-button">
         <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>
           {user._id === 1 ? 'Log In' : user.username}
@@ -63,14 +63,6 @@ export default function Header(
   const onSubmit = (value: string) => {
     navigate(`/search/?productName=${value}`)
   }
-
-  const LoginButton = (
-    <Link to={'/login'}>
-      <div className="login-button">
-        <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>Log In</h2>
-      </div>
-    </Link>
-  );
 
   const openProductModal = () => {
     if(user._id !== 1) {
@@ -111,7 +103,6 @@ export default function Header(
       {HomeIcon}
       {AccountButton}
       {CreateProductButton}
-      {user._id === 1 && LoginButton}
       {SearchBar}
       {width > 1150 && <h3 className="adjustedFont uniswapLogoMini titleColor">UniSwap</h3>}
       <Modal isOpen={isOpen} onClose={onClose}>

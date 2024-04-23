@@ -123,3 +123,19 @@
     align-self: center;
     border-radius: 0px;
 }
+
+.logout-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5ed67a;
+    border: 2px solid #5b77b5;
+    border-radius: 45px;
+    cursor: pointer;
+    width: 150px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 50px;
+    margin-left: 5px;
+    color: #F96161;
+}
