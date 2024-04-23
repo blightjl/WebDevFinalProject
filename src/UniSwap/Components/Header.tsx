@@ -21,17 +21,18 @@ export default function Header(
     profileType: 'SELLER',
     _id: 1,
   });
+  
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
     };
     window.addEventListener('resize', handleResize);
 
-    const getClient = async () => {
+    const fetchUser = async () => {
       const user = await client.home();
       setUser(user);
     }
-  getClient();
+    fetchUser();
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -51,7 +52,9 @@ export default function Header(
   const AccountButton = (
     <Link to={`/profile/?profileId=${user._id}`}>
       <div className="account-button">
-        <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>Account</h2>
+        <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>
+          {user._id === 1 ? 'Log In' : user.username}
+        </h2>
       </div>
     </Link>
   );
@@ -108,9 +111,6 @@ export default function Header(
       {HomeIcon}
       {AccountButton}
       {CreateProductButton}
-      {/* {user._id 
-        ? user.profileType === 'Seller' && CreateProductButton
-        : LoginButton} */}
       {user._id === 1 && LoginButton}
       {SearchBar}
       {width > 1150 && <h3 className="adjustedFont uniswapLogoMini titleColor">UniSwap</h3>}
