@@ -3,6 +3,7 @@ import { useNavigate, Route, Routes, Link } from "react-router-dom";
 import * as client from "../Account/client";
 import "./index.css"
 import "../ColorScheme.css";
+import Header from "../Components/Header";
 
 const accountTypes = ['BUYER', 'SELLER', 'ADMIN', 'USER'];
 
@@ -41,8 +42,8 @@ function Register() {
 
   return (
     // !NOTE: the UniSwap logo should collapse when it approaches the register box i.e. in screen size: xs, s, m
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: '100vh' }}>
-      <h1 className="adjustedFont uniswapLogo titleColor">UniSwap</h1>
+    <div style={{ display: "flex", flexDirection: 'column', alignItems: "center", height: '100vh' }}>
+      <Header />
       <form className="registerBox pinkBackgroundColor" onSubmit={navToLogin}>
       <h2 className="adjustedFont" style={{marginTop: "0px"}}>Register</h2>
       <div className="labelInput">
