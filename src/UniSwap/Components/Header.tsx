@@ -99,7 +99,7 @@ export default function Header(
   );
 
   return(
-    <div className="row" style={{ alignItems: 'center', flexWrap:'nowrap', height: 96 }}>
+    <div className="row" style={{ justifyContent: 'center', alignItems: 'center', flexWrap:'nowrap', height: 96 }}>
       {HomeIcon}
       {AccountButton}
       {CreateProductButton}
