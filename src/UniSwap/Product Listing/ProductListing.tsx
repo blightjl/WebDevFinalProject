@@ -11,6 +11,18 @@ import ProductComment from '../Types/ProductComment';
 import { useEffect, useState } from "react";
 import * as productClient from '../Types/productClient';
 import * as accountClient from '../Account/client';
+import axios from "axios";
+
+
+// Define the Video interface
+interface Video {
+  id: {
+    videoId: string;
+  };
+  snippet: {
+    title: string;
+  };
+}
 
 export default function ProductListing(
 ) {
@@ -68,6 +80,22 @@ export default function ProductListing(
     accountClient.addProduct(product);
   };
   // let placeholderSimilarProduct: Product[] = [placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct];
+  const [similarVideos, setSimilarVideos] = useState<Video[]>([]); 
+
+useEffect(() => {
+  const fetchSimilarVideos = async () => {
+    try {
+      const response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${product.title}&key=AIzaSyAeZHD_D-qivcyGJIudLrjdUSp4lihwh4k`
+      );
+      setSimilarVideos(response.data.items);
+    } catch (error) {
+      console.error("Error fetching similar videos:", error);
+    }
+  };
+  fetchSimilarVideos();
+}, [product.title]);
+
 
   return( 
     <>
@@ -90,8 +118,21 @@ export default function ProductListing(
           <br />
           <h4 style={{ margin: 0, fontSize: '.7rem' }}>Product Type: {product.type}</h4>
           <br />
-          <p>Similar Products</p>
+          <p>Similar Videos About Product</p>
           {/* TODO switch to youtube video */}
+          <div className="similar-videos-container">
+        {similarVideos.map((video, index) => (
+          <iframe
+            key={index}
+            title={video.snippet.title}
+            width="560"
+            height="315"
+            src={`https://www.youtube.com/embed/${video.id.videoId}`}
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          />
+        ))}
+      </div>
           {/* <div className="similar-items-container">
             {simaler.map((product, index) => (
               <StaticTile
