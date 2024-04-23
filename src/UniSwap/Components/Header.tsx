@@ -58,7 +58,7 @@ export default function Header(
   
 
   const onSubmit = (value: string) => {
-    navigate(`/product/?productName=${value}`)
+    navigate(`/search/?productName=${value}`)
   }
 
   const LoginButton = (
