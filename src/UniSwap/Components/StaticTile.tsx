@@ -17,7 +17,7 @@ export default function StaticTile(
 ) {
 
   return(
-    <Link to={`/product/?productName=${title}`}>
+    <Link to={`/details/?identifier=${title}`}>
       <div 
         className={`static-tile-container-${size}`}
       >

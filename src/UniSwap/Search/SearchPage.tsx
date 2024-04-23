@@ -12,7 +12,7 @@ export default function SearchPage() {
   const [foundProducts, setFoundProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-      const productName = searchParams.get('productName') || '';
+      const productName = searchParams.get('identifier') || '';
 
       const fetchProducts = async () => {
         const allProducts = await productClient.findAllProducts();
