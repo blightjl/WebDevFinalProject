@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Header.css";
 import marketPlace from "../Images/marketplace_icon.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import * as client from '../Account/client';
 import { Modal, ModalBody, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import CreateProductModal from "./CreateProductModal";
@@ -69,8 +69,17 @@ export default function Header(
     </Link>
   );
 
+  const openProductModal = () => {
+    if(user._id !== 1) {
+      onOpen();
+    } else {
+      alert('Must Log in First');
+      navigate('/login');
+    }
+  }
+
   const CreateProductButton = (
-    <div className="create-product-button" onClick={onOpen}>
+    <div className="create-product-button" onClick={openProductModal}>
       <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>Create Product</h2>
     </div>
 
@@ -102,6 +111,7 @@ export default function Header(
       {/* {user._id 
         ? user.profileType === 'Seller' && CreateProductButton
         : LoginButton} */}
+      {user._id === 1 && LoginButton}
       {SearchBar}
       {width > 1150 && <h3 className="adjustedFont uniswapLogoMini titleColor">UniSwap</h3>}
       <Modal isOpen={isOpen} onClose={onClose}>
