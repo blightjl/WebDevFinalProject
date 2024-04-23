@@ -7,28 +7,21 @@ export default function StaticTile(
   title,
   price,
   image,
-  size,
 } : {
   title: string;
   price: string;
   image: any;
-  size?: string;
 }
 ) {
-
   return(
-    <Link to={`/details/?identifier=${title}`}>
-      <div 
-        className={`static-tile-container-${size}`}
-      >
-        <img src={image} className={`interactable-tile-image-${size}`} />
-        {size !== 'sm' &&
-          <>
-          <p style={{ fontSize: '2rem' }} className="adjustedFont">{title}</p>
-          <p style={{ fontSize: '2rem' }} className="adjustedFont">{`${price}$`}</p>  
-          </>
-        }
-      </div>
-    </Link>
+    <div 
+      className={`static-tile-container`}
+    >
+      <Link to={`/details/?identifier=${title}`}>
+        <img src={image} className={`interactable-tile-image`} />
+        <p style={{ fontSize: '1rem' }} className="adjustedFont">{title}</p>
+        <p style={{ fontSize: '1rem' }} className="adjustedFont">{`${price}$`}</p>  
+      </Link>
+    </div>
   )
 }

@@ -14,7 +14,9 @@
 }
 
 .homelistings {
-    color: #f96161;
+    margin: 3px;
+    font-size: 2rem;
+    color: #d05151;
 }
 
 .centerForHome {
@@ -23,8 +25,10 @@
 }
 
 .listOfItems {
-    height: 300px;
-    width: 100%;
-    background-color: #f96161;
-    padding-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+    height: 250px;
+    /* background-color: #f96161; */
+    padding-bottom: 20px;
 }

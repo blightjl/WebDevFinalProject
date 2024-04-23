@@ -2,55 +2,163 @@ import React, { useEffect, useState } from "react";
 import Header from "../Components/Header";
 import Product from "../Types/Product";
 import StaticTile from "../Components/StaticTile";
-import { useSearchParams } from "react-router-dom";
-import { Route, Routes, Link } from "react-router-dom";
+import * as accountClient from "../Account/client";
+import * as productClient from "../Types/productClient";
+import marketplaceIcon from '../Images/marketplace_icon.png';
 import "./home.css";
 
 function Homepage() {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [foundProducts, setFoundProducts] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([{
+    image: marketplaceIcon,
+    description_short: "This is a short description",
+    description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
+    title: "Item Name",
+    price: "500",
+    type: "Shoes",
+    id: 1,
+    comments: [],
+  },
+  {
+    image: marketplaceIcon,
+    description_short: "This is a short description",
+    description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
+    title: "Item Name 2",
+    price: "500",
+    type: "Shoes",
+    id: 1,
+    comments: [],
+  },
+  {
+    image: marketplaceIcon,
+    description_short: "This is a short description",
+    description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
+    title: "Item Name 3",
+    price: "500",
+    type: "Shoes",
+    id: 1,
+    comments: [],
+  },
+  {
+    image: marketplaceIcon,
+    description_short: "This is a short description",
+    description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
+    title: "Item Name",
+    price: "500",
+    type: "Shoes",
+    id: 1,
+    comments: [],
+  },
+  {
+    image: marketplaceIcon,
+    description_short: "This is a short description",
+    description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
+    title: "Item Name 2",
+    price: "500",
+    type: "Shoes",
+    id: 1,
+    comments: [],
+  },
+  {
+    image: marketplaceIcon,
+    description_short: "This is a short description",
+    description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
+    title: "Item Name 3",
+    price: "500",
+    type: "Shoes",
+    id: 1,
+    comments: [],
+  },
+  {
+    image: marketplaceIcon,
+    description_short: "This is a short description",
+    description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
+    title: "Item Name",
+    price: "500",
+    type: "Shoes",
+    id: 1,
+    comments: [],
+  },
+  {
+    image: marketplaceIcon,
+    description_short: "This is a short description",
+    description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
+    title: "Item Name 2",
+    price: "500",
+    type: "Shoes",
+    id: 1,
+    comments: [],
+  },
+  {
+    image: marketplaceIcon,
+    description_short: "This is a short description",
+    description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
+    title: "Item Name 3",
+    price: "500",
+    type: "Shoes",
+    id: 1,
+    comments: [],
+  }]);
+  const [user, setUser] = useState({
+    username: 'placeholder',
+    password: 'placeholder',
+    name: "Placeholder name",
+    profilePicture: undefined,
+    products: [],
+    bio: "I love to sell things",
+    profileType: 'SELLER',
+    _id: 1,
+  });
 
-    useEffect(() => {
-        const productType = searchParams.get('search');
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await productClient.findAllProducts();
+      setAllProducts(products);
+    }
+    fetchProducts();
 
-        // get products of that type from DB and set it to foundProducts
-        // setFoundProducts()
-    }, []);
+    const fetchUser = async () => {
+      const user = await accountClient.home();
+      setUser(user);
+    }
+    fetchUser();
+  }, []);
 
-    return (
-            <div style={{ height: '100vh' }}>
-            <Header />
-            <br />
-            <h2 className="centerForHome adjustedFont" style={{ fontSize: '35px', }}>
-                HOME
-            </h2>
-            <div className="products-container">
-                {foundProducts.map((product, index) => (
-                    <StaticTile 
-                        title={product.image}
-                        price={product.price} 
-                        image={product.image}        
-                        key={index}            
-                    />
-                ))}
-            </div>
-            <div>
-                <div className="centerForHome adjustedFont homelistings">
-                    Recently Listed Items
-                </div>
-                <div className="listOfItems">
-                </div>
-            </div>
-            <div style={{ backgroundColor: '#e1e9b7', paddingBottom: '100px'}}>
-                <div className="centerForHome adjustedFont homelistings">
-                    Suggested Items
-                </div>
-                <div className="listOfItems">
-                </div>
-            </div>
-                
-        </div>
-    );
+  return (
+    <div style={{ height: '100vh' }}>
+    <Header />
+    <br />
+    <div>
+      <div className="adjustedFont homelistings">
+        Recently Listed Items
+      </div>
+      <div className="listOfItems">
+      {allProducts.map((product, index) => (
+        <StaticTile
+          title={product.title}
+          price={product.price}
+          image={product.image}
+          key={index}
+        />
+      ))}
+      </div>
+    </div>
+    <div style={{ backgroundColor: '#e1e9b7', paddingBottom: '100px'}}>
+      <div className="adjustedFont homelistings">
+        {user._id !== 1 ? 'Suggested Items' : 'Popular Items'}
+      </div>
+      <div className="listOfItems">
+        {allProducts.reverse().map((product, index) => (
+          <StaticTile
+            title={product.title}
+            price={product.price}
+            image={product.image}
+            key={index}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+);
 }
 
 export default Homepage;
