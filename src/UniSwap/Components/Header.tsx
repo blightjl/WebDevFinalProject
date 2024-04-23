@@ -49,7 +49,7 @@ export default function Header(
   );
 
   const AccountButton = (
-    <Link to={`/profile/?userID=${user._id}`}>
+    <Link to={`/profile/?profileId=${user._id}`}>
       <div className="account-button">
         <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>Account</h2>
       </div>

@@ -2,7 +2,7 @@ import { FaEdit } from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
 import "../ColorScheme.css";
 import "./index.css"
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductListingTile from "./ProductListingTile";
 import Header from '../Components/Header';
 import {
@@ -12,23 +12,12 @@ import {
   ModalBody,
   useDisclosure
 } from '@chakra-ui/react'
+import * as accountClient from '../Account/client';
 import EditProfile from "../ProfileEdit";
 import profile from "../Types/Profile";
 import Product from "../Types/Product";
 
 function ProfilePage() {
-  // const [savedProducts, setSavedProducts] = useState<Product[]>([]);
-  
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [savedProducts, setSavedProducts] = useState<Product[]>([]);
-
-  useEffect(()=> {
-    const userID = searchParams.get('userID');
-    
-    // grab product from DB using ID and set it to product
-    // setUser();
-  }, [])
-
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [user, setUser] = useState<profile>({
     username: 'placeholder',
@@ -40,6 +29,24 @@ function ProfilePage() {
     profileType: 'SELLER',
     _id: 1,
   });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [savedProducts, setSavedProducts] = useState<Product[]>([]);
+
+  useEffect(()=> {
+    let userId = searchParams.get('profileId');
+    if (userId) {
+      const fetchUser = async () => {
+        const user = await accountClient.findUserById(userId!);
+      }
+      fetchUser();
+    } else {
+      const fetchUser = async () => {
+        const user = await accountClient.home();
+        setUser(user);
+      }
+      fetchUser();
+    }
+  }, [])
 
   return (
     <div style={{ height: '100vh' }}>
