@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Route, Routes, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import * as client from "../Account/client";
 import "./index.css"
 import "../ColorScheme.css";
@@ -8,7 +8,6 @@ import Header from "../Components/Header";
 const accountTypes = ['BUYER', 'SELLER', 'ADMIN', 'USER'];
 
 function Register() {
-  const [error, setError] = useState("");
   const [account, setAccount] = useState({
     _id: "",
     username: "",
@@ -28,15 +27,10 @@ function Register() {
 
   const register = async () => {
     try {
-      console.log(account);
       await client.register(account);
-      // navigate("/");
+      navigate("/home");
     } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Unexpected error encountered.");
-      }
+      alert('Error while Registering');
     }
   };
 
