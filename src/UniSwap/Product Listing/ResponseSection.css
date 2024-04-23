@@ -7,3 +7,23 @@
     border-radius: 20px;
     padding: 10px;
 }
+
+.comment-textArea {
+    width: 90%;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #d8caca;
+    border: 2px solid #FF7B87;
+}
+
+.comment-submit {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.comment-delete {
+    margin-right: 15px;
+    color: red;
+    cursor: pointer;
+}

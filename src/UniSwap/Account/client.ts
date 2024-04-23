@@ -21,6 +21,11 @@ export const login = async (credentials: Account) => {
     return response.data;
 };
 
+export const logout = async () => {
+    const response = await axios.post(`${ACCOUNTS_API}/login`);
+    return response.data;
+}
+
 export const home = async () => {
     const response = await axios.post(`${ACCOUNTS_API}/home`);
     return response.data;

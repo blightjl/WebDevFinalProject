@@ -114,7 +114,7 @@ export default function ProductListing(
       <br />
       <br />
       <br />
-      <ResponseSection comments={product.comments}/>
+      <ResponseSection product={product} comments={product.comments}/>
       <br />
     </div>
     </>
