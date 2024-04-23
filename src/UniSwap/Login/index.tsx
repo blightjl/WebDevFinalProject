@@ -19,7 +19,7 @@ function Homepage() {
     const login = async (event : any) => {
         event.preventDefault();
         try {
-            console.log(" YOU ARE NOW LOGGING IN...")
+            // console.log(" YOU ARE NOW LOGGING IN...")
             await client.login(credentials);
             // console.log(response)
             console.log("LOGGING IN!");
@@ -50,9 +50,11 @@ function Homepage() {
                 <input className="inputField" name="password" type="password" value={credentials.password} 
                     onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}/>
             </div>
-            <div>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <button className="adjustedFont submitButtonLGN" type="submit"><strong>SUBMIT</strong></button>
-                <button className="adjustedFont registerButtonLGN" type="button"  onClick={navToRegister}><strong>REGISTER</strong></button>
+                <button className="adjustedFont registerButtonLGN" type="button"  onClick={navToRegister}>
+                    <strong>REGISTER</strong>
+                </button>
             </div>
             </form>
             {/* should be scalable */}

@@ -26,6 +26,19 @@
     margin-bottom: 10px;
 }
 
+.bookmark-product-button {
+    width: 170px;
+    height: 35px;
+    background-color: #ebbf21;
+    border: 2px solid #ad8e20;
+    border-radius: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
 .product-container {
     display: flex;
     flex-direction: row;

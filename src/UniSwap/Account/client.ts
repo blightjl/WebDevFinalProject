@@ -35,3 +35,9 @@ export const findUserById = async (userId: String) => {
     const response = await axios.get(`${ACCOUNTS_API}/${userId}`);
     return response.data;
 }
+
+export const addProduct = async (product: any) => {
+    const user = await home();
+    const response = await axios.put(`${ACCOUNTS_API}/addProduct/${user._id}`, product);
+    return response.data
+};

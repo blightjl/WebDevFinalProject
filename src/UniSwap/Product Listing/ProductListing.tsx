@@ -14,23 +14,25 @@ import * as accountClient from '../Account/client';
 
 export default function ProductListing(
 ) {
-
   const [product, setProduct] = useState<Product>({
     image: marketplaceIcon,
     description_short: "This is a short description",
     description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
     title: "Item Name",
-    price: "500$",
+    price: "500",
     type: "Shoes",
     id: 1,
     comments: [],
   });
   const [seller, setSeller] = useState<profile>({
+    username: 'placeholder',
+    password: 'placeholder',
     name: "Placeholder name",
     profilePicture: undefined,
     products: [],
     bio: "I love to sell things",
-    profileType: 'Seller'
+    profileType: 'SELLER',
+    _id: 1,
   });
   const [searchParams, setSearchParams] = useSearchParams();
   
@@ -49,6 +51,10 @@ export default function ProductListing(
     }
     fetchUser();
   }, []);
+
+  const handleBookmark = () => {
+    accountClient.addProduct(product);
+  };
   // let placeholderSimilarProduct: Product[] = [placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct, placeholderProduct];
 
   return( 
@@ -87,6 +93,9 @@ export default function ProductListing(
           </div> */}
           <div className="buy-product-button">
             <h3>Buy Product</h3>
+          </div>
+          <div className="bookmark-product-button" onClick={handleBookmark}>
+            <h3>Bookmark Product</h3>
           </div>
         </div>
       </div>
