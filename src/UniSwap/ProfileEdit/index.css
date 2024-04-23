@@ -41,11 +41,13 @@ button {
   background-color: #DF9898;
   color: #ffffff;
   margin-right: 10px;
+  width: 70px;
 }
 
 .save-button {
   background-color: #E5C3C6;
   color: #ffffff;
+  width: 140px;
 }
 
 .button-container {

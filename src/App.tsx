@@ -7,7 +7,6 @@ import Login from './UniSwap/Login'
 import "./UniSwap/ColorScheme.css";
 import './App.css';
 import ProfilePage from './UniSwap/Profile';
-import EditProfile from './UniSwap/ProfileEdit';
 import SearchPage from './UniSwap/Search/SearchPage';
 import Homepage from './UniSwap/Homepage/home';
 import ProductListing from './UniSwap/Product Listing/ProductListing';
@@ -23,7 +22,8 @@ function App() {
             <Route path="/profile/*" element={<ProfilePage/>}/>
             <Route path="/home" element={<Homepage />} />
             <Route path="/register" element={<Register/>} />
-            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Navigate to="/home" />}/>
             <Route path="/search" element={<SearchPage />} />
             <Route path="/product/*" element={<ProductListing />} />
           </Routes>
