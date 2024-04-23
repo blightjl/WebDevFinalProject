@@ -85,13 +85,15 @@ function Register() {
       </div>
       <div>
         <button className="adjustedFont registerButton" type="button" onClick={register}>
-          <strong>REGISTER</strong>
+          <strong>SUBMIT</strong>
         </button>
-        <button className="adjustedFont loginButton" type="submit"><strong>LOG IN</strong></button>
+        <Link to="/login">
+          <button className="adjustedFont loginButton"><strong>LOG IN</strong></button>
+        </Link>
       </div>
       </form>
       <br/>
-      {error && <div>{error}</div>}
+      {/* {error && <div>{error}</div>} */}
     </div>
   );
 }
