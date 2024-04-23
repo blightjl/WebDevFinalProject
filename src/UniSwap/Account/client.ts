@@ -35,6 +35,10 @@ export const findUserById = async (userId: String) => {
     const response = await axios.get(`${ACCOUNTS_API}/${userId}`);
     return response.data;
 }
+export const findUserByName = async (userName: String) => {
+    const response = await axios.get(`${ACCOUNTS_API}/name/${userName}`);
+    return response.data;
+}
 
 export const addProduct = async (product: any) => {
     const user = await home();

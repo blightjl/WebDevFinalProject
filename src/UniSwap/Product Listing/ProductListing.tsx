@@ -22,7 +22,19 @@ export default function ProductListing(
     price: "500",
     type: "Shoes",
     id: 1,
-    comments: [],
+    comments: [{
+        commentID: 1,
+        userID: 1,
+        userName: 'placeholder 2',
+        description: 'COMMENT',
+      },
+      {
+        commentID: 2,
+        userID: 2,
+        userName: 'placeholder 2',
+        description: 'COMMENT',
+      }
+    ],
   });
   const [seller, setSeller] = useState<profile>({
     username: 'placeholder',

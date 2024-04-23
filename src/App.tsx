@@ -17,17 +17,15 @@ function App() {
 
     <ChakraProvider>
       <HashRouter>
-        {/* <div className="backgroundColor" style={{display: "flex", alignItems: "center", justifyContent: "center", alignItems: 'flex-'}}> */}
-          <Routes>
-            <Route path="/profile/*" element={<ProfilePage/>}/>
-            <Route path="/home" element={<Homepage />} />
-            <Route path="/register" element={<Register/>} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Navigate to="/home" />}/>
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/product/*" element={<ProductListing />} />
-          </Routes>
-        {/* </div> */}
+        <Routes>
+          <Route path="/profile/*" element={<ProfilePage/>}/>
+          <Route path="/home" element={<Homepage />} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Navigate to="/home" />}/>
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/details/*" element={<ProductListing />} />
+        </Routes>
       </HashRouter>
     </ChakraProvider>
   );

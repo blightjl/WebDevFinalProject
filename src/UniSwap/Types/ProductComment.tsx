@@ -3,5 +3,4 @@ export default interface ProductComment {
     userID: Number;
     userName: String;
     description: String;
-    likes: Number;
 }

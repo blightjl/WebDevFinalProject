@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Header.css";
 import marketPlace from "../Images/marketplace_icon.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import * as client from '../Account/client';
 import { Modal, ModalBody, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import CreateProductModal from "./CreateProductModal";
@@ -21,17 +21,18 @@ export default function Header(
     profileType: 'SELLER',
     _id: 1,
   });
+  
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
     };
     window.addEventListener('resize', handleResize);
 
-    const getClient = async () => {
+    const fetchUser = async () => {
       const user = await client.home();
       setUser(user);
     }
-  getClient();
+    fetchUser();
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -49,16 +50,18 @@ export default function Header(
   );
 
   const AccountButton = (
-    <Link to={`/profile/?userID=${user._id}`}>
+    <Link to={`/profile/?profileId=${user._id}`}>
       <div className="account-button">
-        <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>Account</h2>
+        <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>
+          {user._id === 1 ? 'Log In' : user.username}
+        </h2>
       </div>
     </Link>
   );
   
 
   const onSubmit = (value: string) => {
-    navigate(`/product/?productName=${value}`)
+    navigate(`/search/?productName=${value}`)
   }
 
   const LoginButton = (
@@ -69,8 +72,17 @@ export default function Header(
     </Link>
   );
 
+  const openProductModal = () => {
+    if(user._id !== 1) {
+      onOpen();
+    } else {
+      alert('Must Log in First');
+      navigate('/login');
+    }
+  }
+
   const CreateProductButton = (
-    <div className="create-product-button" onClick={onOpen}>
+    <div className="create-product-button" onClick={openProductModal}>
       <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>Create Product</h2>
     </div>
 
@@ -99,9 +111,7 @@ export default function Header(
       {HomeIcon}
       {AccountButton}
       {CreateProductButton}
-      {/* {user._id 
-        ? user.profileType === 'Seller' && CreateProductButton
-        : LoginButton} */}
+      {user._id === 1 && LoginButton}
       {SearchBar}
       {width > 1150 && <h3 className="adjustedFont uniswapLogoMini titleColor">UniSwap</h3>}
       <Modal isOpen={isOpen} onClose={onClose}>

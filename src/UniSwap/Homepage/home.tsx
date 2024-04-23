@@ -36,14 +36,14 @@ function Homepage() {
             </div>
             <div>
                 <div className="centerForHome adjustedFont homelistings">
-                    Items for Sale
+                    Recently Listed Items
                 </div>
                 <div className="listOfItems">
                 </div>
             </div>
             <div style={{ backgroundColor: '#e1e9b7', paddingBottom: '100px'}}>
                 <div className="centerForHome adjustedFont homelistings">
-                    Recently sold Items
+                    Suggested Items
                 </div>
                 <div className="listOfItems">
                 </div>
