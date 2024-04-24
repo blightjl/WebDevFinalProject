@@ -21,7 +21,7 @@ export default function Header(
     profileType: 'SELLER',
     _id: 1,
   });
-  
+  console.log(user)
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
@@ -29,8 +29,12 @@ export default function Header(
     window.addEventListener('resize', handleResize);
 
     const fetchUser = async () => {
-      const user = await client.home();
-      setUser(user);
+      try {
+        const user = await client.home();
+        setUser(user);
+      } catch (error) {
+
+      }
     }
     fetchUser();
 
@@ -50,10 +54,10 @@ export default function Header(
   );
 
   const AccountButton = (
-    <Link to={user._id === 1 ? '/login' : `/profile/?profileId=${user._id}`}>
+    <Link to={user ? `/profile/?profileId=${user._id || 1}` : '/login'}>
       <div className="account-button">
         <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>
-          {user._id === 1 ? 'Log In' : user.username}
+          {user ? user.username : 'Log In'}
         </h2>
       </div>
     </Link>

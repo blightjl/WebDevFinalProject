@@ -20,15 +20,12 @@ function Homepage() {
     const login = async (event : any) => {
         event.preventDefault();
         try {
-            // console.log(" YOU ARE NOW LOGGING IN...")
             await client.login(credentials);
-            // console.log(response)
-            console.log("LOGGING IN!");
+            console.log('home')
+            console.log(await client.home());
             navigate("/home");
         } catch (error) {
-            console.log(error);
-            console.log("FAILED LOGGING IN LMAO");
-            // alert(error);
+            alert(error);
         }
     };
 
@@ -37,7 +34,6 @@ function Homepage() {
     };
 
     return (
-        // !NOTE: the UniSwap logo should collapse when it approaches the register box i.e. in screen size: xs, s, m
         <div style={{ display: "flex", flexDirection: 'column', alignItems: "center", height: '100vh' }}>
             <Header />
             <form className="registerBox pinkBackgroundColor" onSubmit={login}>

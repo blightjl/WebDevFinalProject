@@ -37,8 +37,12 @@ export default function ResponseSection({
 
   useEffect(() => {
     const fetchUser = async () => {
-      const user = await accountClient.home();
-      setUser(user);
+      try {
+        const user = await accountClient.home();
+        setUser(user);
+      } catch (error) {
+
+      }
     }
     fetchUser();
   }, []);

@@ -5,10 +5,9 @@ import "./index.css"
 import "../ColorScheme.css";
 import Header from "../Components/Header";
 
-const accountTypes = ['BUYER', 'SELLER', 'ADMIN', 'USER'];
+const accountTypes = ['BUYER', 'SELLER', 'ADMIN'];
 
 function Register() {
-  const [error, setError] = useState("");
   const [account, setAccount] = useState({
     _id: "",
     username: "",
@@ -30,13 +29,9 @@ function Register() {
     try {
       console.log(account);
       await client.register(account);
-      // navigate("/");
+      navigate("/login");
     } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Unexpected error encountered.");
-      }
+      alert(err);
     }
   };
 
@@ -69,7 +64,7 @@ function Register() {
       <div className="labelInput">
         <strong className="adjustedFont">User Type</strong><br/>
         {accountTypes.map((type) => 
-          <>
+          <span key={type}>
             <input
             type="radio"
             id={type}
@@ -80,7 +75,7 @@ function Register() {
             onChange={handleRadioChange}
             />
             <label htmlFor={type} style={{ fontSize: '.7rem' }} className='adjustedFont'>{type}</label><br />
-          </>
+          </span>
         )}
       </div>
       <div>

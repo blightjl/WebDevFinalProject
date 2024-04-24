@@ -3,7 +3,8 @@ const api = axios.create({
   withCredentials: true
 });
 
-export const PRODUCT_API = `${process.env.REACT_APP_BASE_API_URL}/api/products`;
+const API_URL = 'http://localhost:4000';
+export const PRODUCT_API = `${API_URL}/api/products`;
 
 
 export const updateProduct = async (product: any) => {

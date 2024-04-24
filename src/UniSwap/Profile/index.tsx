@@ -42,8 +42,12 @@ function ProfilePage() {
       fetchUser();
     } else {
       const fetchUser = async () => {
+        try {
         const user = await accountClient.home();
         setUser(user);
+        } catch (error) {
+
+        }
       }
       fetchUser();
     }

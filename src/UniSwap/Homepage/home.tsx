@@ -108,7 +108,6 @@ function Homepage() {
     profileType: 'SELLER',
     _id: 1,
   });
-
   useEffect(() => {
     const fetchProducts = async () => {
       const products = await productClient.findAllProducts();
@@ -117,8 +116,12 @@ function Homepage() {
     fetchProducts();
 
     const fetchUser = async () => {
-      const user = await accountClient.home();
-      setUser(user);
+      try {
+        const user = await accountClient.home();
+        setUser(user);
+      } catch (error) {
+        
+      }
     }
     fetchUser();
   }, []);
@@ -144,7 +147,7 @@ function Homepage() {
     </div>
     <div style={{ backgroundColor: '#e1e9b7', paddingBottom: '100px'}}>
       <div className="adjustedFont homelistings">
-        {user._id !== 1 ? 'Suggested Items' : 'Popular Items'}
+        {user ? 'Suggested Items' : 'Popular Items'}
       </div>
       <div className="listOfItems">
         {allProducts.reverse().map((product, index) => (
