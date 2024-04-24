@@ -16,18 +16,36 @@ import * as accountClient from '../Account/client';
 import EditProfile from "../ProfileEdit";
 import profile from "../Types/Profile";
 
+function hasNumber(input: string) {
+  return /\d/.test(input);
+}
+
 function ProfilePage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [account, setAccount] = useState<profile>();
   const [user, setUser] = useState<profile>();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+
   useEffect(()=> {
-    let userId = searchParams.get('profileId');
+    let userId = searchParams.get('identifier');
     if (userId) {
+      const fetchAccount = async () => {
+        if (hasNumber(userId!)) {
+          const user = await accountClient.findUserById(userId!);
+          setAccount(user);
+        } else {
+          const user = await accountClient.findUserByName(userId!);
+          setAccount(user);
+        }
+      }
+      fetchAccount();
+
       const fetchUser = async () => {
-        const user = await accountClient.findUserById(userId!);
-        console.log(user)
-        setUser(user);
+        try {
+          const user = await accountClient.home();
+          setUser(user);
+        } catch (error) { }
       }
       fetchUser();
     }
@@ -45,26 +63,26 @@ function ProfilePage() {
               alt="Profile"
               className="profile-image"
             />
-            <FaEdit 
+            {user && user._id === account?._id && <FaEdit 
               className="edit-icon edit-button"
               onClick={onOpen}
-            />
+            />}
             </div>
-            <h1 className="adjustedFont" style={{ width: 'fit-content', marginTop: 5, fontSize: '1.7rem', color: '#414141' }}>{user?.name}</h1>
+            <h1 className="adjustedFont" style={{ width: 'fit-content', marginTop: 5, fontSize: '1.7rem', color: '#414141' }}>{account?.name || account?.username}</h1>
           </div>
           <p className="profileBio adjustedFont">
             <br />
-            {user && user.bio}
+            {account && (account.bio || 'Hi I\'m new Here!')}
           </p>
         </div>
         <div className="products-wrapper">
-          <div> <h1 className="adjustedFont" style={{ color: 'grey' }}>{user?.profileType === 'SELLER' ?  'Product Listings' : 'Bookmarked Products'}</h1>
+          <div> <h1 className="adjustedFont" style={{ color: 'grey' }}>{account?.profileType === 'SELLER' ?  'Product Listings' : 'Bookmarked Products'}</h1>
             <div className="products-container-profile">
-              {user?.products
-              ? user?.products.map((product, index) => (
+              {account?.products
+              ? account?.products.map((product, index) => (
                   <ProductListingTile product={product} key={index} />
                 )) 
-              : <p className="adjustedFont" style={{ marginLeft: 5 }}>{`No ${user?.profileType === 'BUYER' ? 'Saved Products' : 'Product Listings'}`}</p>}
+              : <p className="adjustedFont" style={{ marginLeft: 5 }}>{`No ${account?.profileType === 'BUYER' ? 'Saved Products' : 'Product Listings'}`}</p>}
             </div>
           </div>
         </div>
@@ -73,7 +91,7 @@ function ProfilePage() {
         <ModalOverlay />
         <ModalContent backgroundColor='#E1E9B7'>
           <ModalBody>
-            <EditProfile onClose={onClose} account={user} />
+            <EditProfile onClose={onClose} account={account} />
           </ModalBody>
         </ModalContent>
       </Modal>

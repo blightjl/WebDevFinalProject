@@ -25,68 +25,38 @@ interface Video {
 export default function ProductListing(
 ) {
   const [similarVideos, setSimilarVideos] = useState<Video[]>([]); 
-  const [product, setProduct] = useState<Product>({
-    image: marketplaceIcon,
-    description_short: "This is a short description",
-    description_long: "This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. This is a super duper long description where I talk about a bunch of stuff. ",
-    title: "Item Name",
-    price: "500",
-    type: "Shoes",
-    id: 1,
-    comments: [{
-        commentID: 1,
-        userID: 1,
-        userName: 'placeholder 2',
-        description: 'COMMENT',
-      },
-      {
-        commentID: 2,
-        userID: 2,
-        userName: 'placeholder 2',
-        description: 'COMMENT',
-      }
-    ],
-  });
-  const [seller, setSeller] = useState<profile>({
-    username: 'placeholder',
-    password: 'placeholder',
-    name: "Placeholder name",
-    profilePicture: undefined,
-    products: [],
-    bio: "I love to sell things",
-    profileType: 'SELLER',
-    _id: 1,
-  });
+  const [product, setProduct] = useState<Product>();
+  const [seller, setSeller] = useState<profile>();
   const [searchParams, setSearchParams] = useSearchParams();
   
   useEffect(()=> {
     const fetchProduct = async () => {
-      const searchedProduct = searchParams.get('productName');
+      const searchedProduct = searchParams.get('identifier');
       setSearchParams(searchParams)
       const product = await productClient.findProductByName(searchedProduct!);
       setProduct(product);
     }
     fetchProduct();
 
-    const fetchUser = async () => {
-      const seller = product.id;
+    const fetchSeller = async () => {
+      const seller = product?.id;
       const sellerData = await accountClient.findUserById(`${seller}`);
       setSeller(sellerData);
     }
-    fetchUser();
+    // fetchSeller();
     
     const fetchSimilarVideos = async () => {
       try {
         const response = await axios.get(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${product.title}&key=AIzaSyAeZHD_D-qivcyGJIudLrjdUSp4lihwh4k`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${product?.title}&key=AIzaSyAeZHD_D-qivcyGJIudLrjdUSp4lihwh4k`
         );
         setSimilarVideos(response.data.items);
       } catch (error) {
         console.error("Error fetching similar videos:", error);
       }
     };
-    fetchSimilarVideos();
-  });
+    // fetchSimilarVideos();
+  }, [searchParams]);
 
   const handleBookmark = () => {
     accountClient.addProduct(product);
@@ -98,20 +68,20 @@ export default function ProductListing(
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div className="product-container">
         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 20, marginRight: 20}}>
-          <img alt='product listing' className="product-listing-image" src={product.image || '../../public/default_product.jpeg'}/>
+          <img alt='product listing' className="product-listing-image" src={product?.image || '../../public/default_product.jpeg'}/>
           <br />
           <p className="adjustedFont product-description-long">
-            {product.description_long || product.description_short}
+            {product?.description_long || product?.description_short}
           </p>
         </div>
         <div className="adjustedFont product-info-section">
-          <h1 style={{ fontSize: '1rem', textWrap: 'wrap' }}>{`${product.title}`}</h1>
-          <h1 style={{ fontSize: '2rem' }}>{`${product.price}$`}</h1>
+          <h1 style={{ fontSize: '1rem', textWrap: 'wrap' }}>{`${product?.title}`}</h1>
+          <h1 style={{ fontSize: '2rem' }}>{`${product?.price}$`}</h1>
           <h4 className="seller-profile-small">
-            {seller.name} <img alt='seller profile' src={seller.profilePicture || '../../public/default_profile.jpeg'} className='seller-image' />
+            {seller?.name} <img alt='seller profile' src={seller?.profilePicture || '../../public/default_profile.jpeg'} className='seller-image' />
           </h4>
           <br />
-          <h4 style={{ margin: 0, fontSize: '.7rem' }}>Product Type: {product.type}</h4>
+          <h4 style={{ margin: 0, fontSize: '.7rem' }}>Product Type: {product?.type}</h4>
           <br />
           <p>Similar Videos About Product</p>
           <div className="similar-videos-container">
@@ -138,7 +108,7 @@ export default function ProductListing(
       <br />
       <br />
       <br />
-      <ResponseSection product={product} comments={product.comments}/>
+      <ResponseSection />
       <br />
     </div>
     </>
