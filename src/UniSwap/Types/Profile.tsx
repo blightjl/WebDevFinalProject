@@ -7,6 +7,6 @@ export default interface profile {
   bio: String,
   products: Product[],
   profilePicture: any,
-  profileType: 'BUYER' | 'SELLER' | 'ADMIN' | 'USER',
+  accountType: 'BUYER' | 'SELLER' | 'ADMIN' | 'USER',
   _id: Number,
 }

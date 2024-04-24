@@ -76,13 +76,13 @@ function ProfilePage() {
           </p>
         </div>
         <div className="products-wrapper">
-          <div> <h1 className="adjustedFont" style={{ color: 'grey' }}>{account?.profileType === 'SELLER' ?  'Product Listings' : 'Bookmarked Products'}</h1>
+          <div> <h1 className="adjustedFont" style={{ color: 'grey' }}>{account?.accountType === 'SELLER' ?  'Product Listings' : 'Bookmarked Products'}</h1>
             <div className="products-container-profile">
               {account?.products
               ? account?.products.map((product, index) => (
                   <ProductListingTile product={product} key={index} />
                 )) 
-              : <p className="adjustedFont" style={{ marginLeft: 5 }}>{`No ${account?.profileType === 'BUYER' ? 'Saved Products' : 'Product Listings'}`}</p>}
+              : <p className="adjustedFont" style={{ marginLeft: 5 }}>{`No ${account?.accountType === 'BUYER' ? 'Saved Products' : 'Product Listings'}`}</p>}
             </div>
           </div>
         </div>

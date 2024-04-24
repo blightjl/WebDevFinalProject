@@ -21,7 +21,7 @@ export default function CreateProductModal(
     profilePicture: undefined,
     products: [],
     bio: "I love to sell things",
-    profileType: 'SELLER',
+    accountType: 'SELLER',
     _id: 1,
   });
   const [name, setName] = useState("");

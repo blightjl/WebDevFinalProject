@@ -105,7 +105,7 @@ function Homepage() {
     profilePicture: undefined,
     products: [],
     bio: "I love to sell things",
-    profileType: 'SELLER',
+    accountType: 'SELLER',
     _id: 1,
   });
   useEffect(() => {

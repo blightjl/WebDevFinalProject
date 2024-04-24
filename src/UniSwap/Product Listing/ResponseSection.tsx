@@ -50,14 +50,17 @@ export default function ResponseSection(): React.JSX.Element {
       description: comment,
     }
     setAllComments(allComments ? [...allComments, newComment] : [newComment])
-    await productClient.updateProduct({...product, comments: allComments});
+    await productClient.updateProduct({...product, comments: allComments ? [...allComments, newComment] : [newComment]});
     setComment('');
   };
+
   const handleDelete = async (commentID: Number) => {
     const newComments = allComments?.filter(comment => comment.commentID !== commentID);
     setAllComments(newComments);
     await productClient.updateProduct({...product, comments: newComments});
   }
+
+  console.log(user)
   return(
     <div className='response-container'>
       {user && 
@@ -83,7 +86,7 @@ export default function ResponseSection(): React.JSX.Element {
       {allComments && allComments.length > 0 
         ? allComments.map((comment: ProductComment, index: number) => (
             <span style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-              {user && user.profileType === 'ADMIN' &&
+              {user && user.accountType === 'ADMIN' &&
               <FaTrash 
                 className='comment-delete'
                 onClick={() => handleDelete(comment.commentID)}
