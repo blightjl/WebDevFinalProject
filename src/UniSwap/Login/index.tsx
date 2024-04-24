@@ -38,12 +38,12 @@ function Homepage() {
                 <h2 className="adjustedFont" style={{marginTop: "0px"}}>Login</h2>
                 <div className="labelInput">
                     <strong className="adjustedFont">Username</strong><br/>
-                    <input className="inputField" name="user" value={credentials.username} 
+                    <input className="inputField adjustedFont" name="user" value={credentials.username} 
                         onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}/>
                 </div>
                 <div className="labelInput">
                     <strong className="adjustedFont">Password</strong><br/>
-                    <input className="inputField" name="password" type="password" value={credentials.password} 
+                    <input className="inputField adjustedFont" name="password" type="password" value={credentials.password} 
                         onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}/>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>

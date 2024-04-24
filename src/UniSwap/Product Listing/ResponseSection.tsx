@@ -85,7 +85,7 @@ export default function ResponseSection(): React.JSX.Element {
       }
       {allComments && allComments.length > 0 
         ? allComments.map((comment: ProductComment, index: number) => (
-            <span style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <span style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} key={index}>
               {user && user.accountType === 'ADMIN' &&
               <FaTrash 
                 className='comment-delete'

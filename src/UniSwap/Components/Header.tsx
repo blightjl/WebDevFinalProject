@@ -13,6 +13,7 @@ export default function Header(
   const [width, setWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
   const [user, setUser] = useState<profile>();
+  const [update, setUpdate] = useState<boolean>(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -76,7 +77,8 @@ export default function Header(
     const handleLogout = async () => {
       try {
         await accountClient.logout();
-        navigate('/home');
+        navigate('/home?');
+        setUpdate(!update);
       } catch (error) {
         alert('Error Logging out');
       }
