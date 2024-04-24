@@ -98,7 +98,7 @@ export default function ProductListing(
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div className="product-container">
         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 20, marginRight: 20}}>
-          <img alt='product listing' className="product-listing-image" src={product.image}/>
+          <img alt='product listing' className="product-listing-image" src={product.image || '../../public/default_product.jpeg'}/>
           <br />
           <p className="adjustedFont product-description-long">
             {product.description_long || product.description_short}
@@ -108,7 +108,7 @@ export default function ProductListing(
           <h1 style={{ fontSize: '1rem', textWrap: 'wrap' }}>{`${product.title}`}</h1>
           <h1 style={{ fontSize: '2rem' }}>{`${product.price}$`}</h1>
           <h4 className="seller-profile-small">
-            {seller.name} <img alt='seller profile' src={seller.profilePicture} className='seller-image' />
+            {seller.name} <img alt='seller profile' src={seller.profilePicture || '../../public/default_profile.jpeg'} className='seller-image' />
           </h4>
           <br />
           <h4 style={{ margin: 0, fontSize: '.7rem' }}>Product Type: {product.type}</h4>

@@ -1,8 +1,8 @@
 import axios from "axios";
+
 const api = axios.create({
     withCredentials: true
- });
- 
+}); 
 const API_URL = 'http://localhost:4000';
 export const ACCOUNTS_API = `${API_URL}/api/accounts`
 export interface Account {
@@ -25,7 +25,7 @@ export const login = async (credentials: Account) => {
 };
 
 export const logout = async () => {
-    const response = await api.post(`${ACCOUNTS_API}/login`);
+    const response = await api.post(`${ACCOUNTS_API}/logout`);
     return response.data;
 }
 
@@ -53,3 +53,8 @@ export const addProduct = async (product: any) => {
     const response = await api.put(`${ACCOUNTS_API}/addProduct/${user._id}`, product);
     return response.data
 };
+
+export const updateProduct = async (account: any) => {
+    const response = await api.put(`${ACCOUNTS_API}/update`, account);
+    return response.data
+}

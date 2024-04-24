@@ -1,5 +1,5 @@
 import { FaEdit } from "react-icons/fa";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "../ColorScheme.css";
 import "./index.css"
 import { useEffect, useState } from "react";
@@ -15,52 +15,33 @@ import {
 import * as accountClient from '../Account/client';
 import EditProfile from "../ProfileEdit";
 import profile from "../Types/Profile";
-import Product from "../Types/Product";
 
 function ProfilePage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [user, setUser] = useState<profile>({
-    username: 'placeholder',
-    password: 'placeholder',
-    name: "John Doe",
-    bio: "Hi, I’m a seller. I love selling things! Things such as shoes, shirts, and pants.",
-    products: [],
-    profilePicture: "https://example.com/profile-image.jpg",
-    profileType: 'SELLER',
-    _id: 1,
-  });
+  const [user, setUser] = useState<profile>();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [savedProducts, setSavedProducts] = useState<Product[]>([]);
-
+  const navigate = useNavigate();
   useEffect(()=> {
     let userId = searchParams.get('profileId');
     if (userId) {
       const fetchUser = async () => {
         const user = await accountClient.findUserById(userId!);
+        console.log(user)
         setUser(user);
-      }
-      fetchUser();
-    } else {
-      const fetchUser = async () => {
-        try {
-        const user = await accountClient.home();
-        setUser(user);
-        } catch (error) {
-
-        }
       }
       fetchUser();
     }
-  }, [])
+  }, [searchParams, isOpen])
 
   const handleLogout = async () => {
     try {
       await accountClient.logout();
+      navigate('/home');
     } catch (error) {
       alert('Error Logging out');
     }
   };
-
+  
   return (
     <div style={{ height: '100vh' }}>
       <Header />
@@ -69,7 +50,7 @@ function ProfilePage() {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div className="profile-icon">
             <img
-              src={user.profilePicture}
+              src='./default_profile.jpeg'
               alt="Profile"
               className="profile-image"
             />
@@ -78,7 +59,7 @@ function ProfilePage() {
               onClick={onOpen}
             />
             </div>
-            <h1 className="adjustedFont" style={{ width: 'fit-content', marginTop: 5, fontSize: '1.7rem', color: '#414141' }}>{user.name}</h1>
+            <h1 className="adjustedFont" style={{ width: 'fit-content', marginTop: 5, fontSize: '1.7rem', color: '#414141' }}>{user?.name}</h1>
           </div>
           <div
             className="logout-button adjustedFont"
@@ -88,17 +69,17 @@ function ProfilePage() {
           </div>
           <p className="profileBio adjustedFont">
             <br />
-            {user.bio}
+            {user && user.bio}
           </p>
         </div>
         <div className="products-wrapper">
-          <div> <h1 className="adjustedFont" style={{ color: 'grey' }}>{user.profileType === 'SELLER' ?  'Product Listings' : 'Bookmarked Products'}</h1>
+          <div> <h1 className="adjustedFont" style={{ color: 'grey' }}>{user?.profileType === 'SELLER' ?  'Product Listings' : 'Bookmarked Products'}</h1>
             <div className="products-container-profile">
-              {savedProducts.length > 0 
-              ? savedProducts.map((product, index) => (
+              {user?.products
+              ? user?.products.map((product, index) => (
                   <ProductListingTile product={product} key={index} />
                 )) 
-              : <p className="adjustedFont" style={{ marginLeft: 5 }}>{`No ${user.profileType === 'BUYER' ? 'Saved Products' : 'Product Listings'}`}</p>}
+              : <p className="adjustedFont" style={{ marginLeft: 5 }}>{`No ${user?.profileType === 'BUYER' ? 'Saved Products' : 'Product Listings'}`}</p>}
             </div>
           </div>
         </div>
@@ -107,7 +88,7 @@ function ProfilePage() {
         <ModalOverlay />
         <ModalContent backgroundColor='#E1E9B7'>
           <ModalBody>
-            <EditProfile onClose={onClose} />
+            <EditProfile onClose={onClose} account={user} />
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -21,8 +21,6 @@ function Homepage() {
         event.preventDefault();
         try {
             await client.login(credentials);
-            console.log('home')
-            console.log(await client.home());
             navigate("/home");
         } catch (error) {
             alert(error);

@@ -10,11 +10,14 @@ const accountTypes = ['BUYER', 'SELLER', 'ADMIN'];
 function Register() {
   const [account, setAccount] = useState({
     _id: "",
+    name: "",
     username: "",
     email: "", 
     password: "",
     repeat: "",
+    bio: 'Hi I\'m new here!',
     accountType: "USER",
+    product: []
   });
   const navigate = useNavigate();
 
@@ -36,11 +39,15 @@ function Register() {
   };
 
   return (
-    // !NOTE: the UniSwap logo should collapse when it approaches the register box i.e. in screen size: xs, s, m
     <div style={{ display: "flex", flexDirection: 'column', alignItems: "center", height: '100vh' }}>
       <Header />
       <form className="registerBox pinkBackgroundColor" onSubmit={navToLogin}>
       <h2 className="adjustedFont" style={{marginTop: "0px"}}>Register</h2>
+      <div className="labelInput">
+        <strong className="adjustedFont">Full Name</strong><br/>
+        <input className="inputField" name="name" value={account.name} 
+          onChange={(e) => setAccount({...account, name: e.target.value })}/>
+      </div>
       <div className="labelInput">
         <strong className="adjustedFont">Username</strong><br/>
         <input className="inputField" name="user" value={account.username} 

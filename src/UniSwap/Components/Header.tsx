@@ -5,23 +5,14 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import * as client from '../Account/client';
 import { Modal, ModalBody, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import CreateProductModal from "./CreateProductModal";
+import profile from "../Types/Profile";
 
 export default function Header(
 ) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [width, setWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
-  const [user, setUser] = useState({
-    username: 'placeholder',
-    password: 'placeholder',
-    name: "Placeholder name",
-    profilePicture: undefined,
-    products: [],
-    bio: "I love to sell things",
-    profileType: 'SELLER',
-    _id: 1,
-  });
-  console.log(user)
+  const [user, setUser] = useState<profile>();
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
@@ -69,7 +60,7 @@ export default function Header(
   }
 
   const openProductModal = () => {
-    if(user._id !== 1) {
+    if(user) {
       onOpen();
     } else {
       alert('Must Log in First');

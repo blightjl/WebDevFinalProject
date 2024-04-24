@@ -1,30 +1,30 @@
 import { useState } from "react";
-import { Route, Routes, Link } from "react-router-dom";
-import { CiShop } from 'react-icons/ci';
-import { FaEdit } from "react-icons/fa";
 import { ModalCloseButton } from '@chakra-ui/react'
-
 import "./index.css"
 import "../ColorScheme.css";
-
+import * as accountClient from '../Account/client';
+import profile from "../Types/Profile";
   
-function EditProfile(
-  {onClose} 
-  : 
-  {onClose: any}
-  ) {
+function EditProfile({
+  account,
+  onClose,
+} : {
+  account?: profile,
+  onClose: any,
+} ) {
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
 
-  const handleSave = () => {
-    const updatedInfo = {
-      name: name,
-      bio: bio,
-      profilePicture: profilePicture ? URL.createObjectURL(profilePicture) : null,
+  const handleSave = async () => {
+    const updatedAccount = {
+      ...account,
+      name: name === '' ? account?.name : name,
+      bio: bio === '' ? account?.bio : bio,
+      profilePicture: profilePicture ? URL.createObjectURL(profilePicture) : null
     };
-    
-    // props.onUpdateProfile(updatedInfo);
+    console.log(updatedAccount)
+    await accountClient.updateProduct(updatedAccount)
     onClose();
   };
 
