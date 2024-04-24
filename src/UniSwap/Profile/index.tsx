@@ -32,15 +32,6 @@ function ProfilePage() {
       fetchUser();
     }
   }, [searchParams, isOpen])
-
-  const handleLogout = async () => {
-    try {
-      await accountClient.logout();
-      navigate('/home');
-    } catch (error) {
-      alert('Error Logging out');
-    }
-  };
   
   return (
     <div style={{ height: '100vh' }}>
@@ -60,12 +51,6 @@ function ProfilePage() {
             />
             </div>
             <h1 className="adjustedFont" style={{ width: 'fit-content', marginTop: 5, fontSize: '1.7rem', color: '#414141' }}>{user?.name}</h1>
-          </div>
-          <div
-            className="logout-button adjustedFont"
-            onClick={handleLogout}
-          >
-            Log Out
           </div>
           <p className="profileBio adjustedFont">
             <br />

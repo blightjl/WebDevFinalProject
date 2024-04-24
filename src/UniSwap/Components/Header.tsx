@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Header.css";
 import marketPlace from "../Images/marketplace_icon.png";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import * as client from '../Account/client';
+import * as accountClient from '../Account/client';
 import { Modal, ModalBody, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import CreateProductModal from "./CreateProductModal";
 import profile from "../Types/Profile";
@@ -13,6 +13,7 @@ export default function Header(
   const [width, setWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
   const [user, setUser] = useState<profile>();
+
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
@@ -21,14 +22,11 @@ export default function Header(
 
     const fetchUser = async () => {
       try {
-        const user = await client.home();
+        const user = await accountClient.home();
         setUser(user);
-      } catch (error) {
-
-      }
+      } catch (error) { }
     }
     fetchUser();
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -56,7 +54,7 @@ export default function Header(
   
 
   const onSubmit = (value: string) => {
-    navigate(`/search/?productName=${value}`)
+    navigate(`/search/?identifier=${value}`)
   }
 
   const openProductModal = () => {
@@ -72,8 +70,26 @@ export default function Header(
     <div className="create-product-button" onClick={openProductModal}>
       <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>Create Product</h2>
     </div>
-
   );
+
+  const LogoutButton = () => {
+    const handleLogout = async () => {
+      try {
+        await accountClient.logout();
+        navigate('/home');
+      } catch (error) {
+        alert('Error Logging out');
+      }
+    };
+
+    return(
+      <div
+        className="logout-button adjustedFont"
+        onClick={handleLogout}
+      >
+        Log Out
+      </div>)
+  };
   
   const SearchBar = (
     <div>
@@ -85,11 +101,12 @@ export default function Header(
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
             const target = e.target as HTMLInputElement;
-            onSubmit(target.value);
+            if (target.value.trim() !== '') {
+              onSubmit(target.value);
+            }
           }
         }}
       />
-      {/* <button onClick={() => onSubmit((document.getElementById('searchBar') as HTMLInputElement)?.value || '')}>Search</button> */}
     </div>
   );
 
@@ -98,6 +115,7 @@ export default function Header(
       {HomeIcon}
       {AccountButton}
       {CreateProductButton}
+      {user && <LogoutButton />}
       {SearchBar}
       {width > 1150 && <h3 className="adjustedFont uniswapLogoMini titleColor">UniSwap</h3>}
       <Modal isOpen={isOpen} onClose={onClose}>

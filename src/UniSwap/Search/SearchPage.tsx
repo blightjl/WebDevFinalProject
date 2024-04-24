@@ -16,24 +16,25 @@ export default function SearchPage() {
 
       const fetchProducts = async () => {
         const allProducts = await productClient.findAllProducts();
-        const filteredProducts = allProducts.filter((name: string) => name.includes(productName));
+        const filteredProducts = allProducts.filter((product: Product) =>
+          product.title.toLowerCase().includes(productName.toLowerCase()))
         setFoundProducts(filteredProducts);
       }
       fetchProducts();
-  }, []);
+  }, [searchParams]);
   
   return(
     <div className="search-container">
       <Header />
       <br />
       <h2 className="adjustedFont" style={{ width: 'fit-content' }}>
-        {searchParams && `Here are some results for ${searchParams.get('productName')}`}
+        {searchParams && `Here are some results for ${searchParams.get('identifier')}`}
       </h2>
       <div className="products-container">
         {foundProducts.length > 0 
             ? foundProducts.map((product, index) => (
             <StaticTile 
-              title={product.image}
+              title={product.title}
               price={product.price}
               image={product.image}
               key={index}
