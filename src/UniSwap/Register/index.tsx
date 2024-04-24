@@ -30,7 +30,6 @@ function Register() {
 
   const register = async () => {
     try {
-      console.log(account);
       await client.register(account);
       navigate("/login");
     } catch (err) {

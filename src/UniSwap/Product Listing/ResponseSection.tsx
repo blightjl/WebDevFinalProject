@@ -60,7 +60,6 @@ export default function ResponseSection(): React.JSX.Element {
     await productClient.updateProduct({...product, comments: newComments});
   }
 
-  console.log(user)
   return(
     <div className='response-container'>
       {user && 

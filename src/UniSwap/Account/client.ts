@@ -50,7 +50,9 @@ export const findUserByName = async (userName: String) => {
 
 export const addProduct = async (product: any) => {
     const user = await home();
-    const response = await api.put(`${ACCOUNTS_API}/addProduct/${user._id}`, product);
+    const allProducts = user.products ? [...user.products, product] : [product]; 
+    const response = await api.put(`${ACCOUNTS_API}/addProduct/${user._id}`, allProducts);
+    console.log(await home())
     return response.data
 };
 

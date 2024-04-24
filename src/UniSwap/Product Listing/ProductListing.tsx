@@ -27,6 +27,7 @@ export default function ProductListing(
   const [similarVideos, setSimilarVideos] = useState<Video[]>([]); 
   const [product, setProduct] = useState<Product>();
   const [seller, setSeller] = useState<profile>();
+  const [user, setUser] = useState<profile>();
   const [searchParams, setSearchParams] = useSearchParams();
   
   useEffect(()=> {
@@ -38,6 +39,14 @@ export default function ProductListing(
     }
     fetchProduct();
 
+    const fetchUser = async () => {
+      try {
+        const user = await accountClient.home();
+        setUser(user);
+      } catch (error) { }
+    }
+    fetchUser();
+
     const fetchSeller = async () => {
       const seller = product?.id;
       const sellerData = await accountClient.findUserById(`${seller}`);
@@ -48,7 +57,7 @@ export default function ProductListing(
     const fetchSimilarVideos = async () => {
       try {
         const response = await axios.get(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${product?.title}&key=AIzaSyAeZHD_D-qivcyGJIudLrjdUSp4lihwh4k`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${product?.title}&key=AIzaSyBBNSU_2IBYyxjQvUA6lp35BvvtyXry-VM`
         );
         setSimilarVideos(response.data.items);
       } catch (error) {
@@ -58,8 +67,16 @@ export default function ProductListing(
     // fetchSimilarVideos();
   }, [searchParams]);
 
-  const handleBookmark = () => {
-    accountClient.addProduct(product);
+  const handleBookmark = async () => {
+    if (user) {
+      if (user.accountType !== 'SELLER') {
+        await accountClient.addProduct(product);
+      } else {
+        alert('You can\'t bookmark a product as a seller!');
+      }
+    } else {
+      alert('You must be logged in to bookmark a product!');
+    }
   };
 
   return( 

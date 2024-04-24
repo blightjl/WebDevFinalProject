@@ -49,7 +49,7 @@ function ProfilePage() {
       }
       fetchUser();
     }
-  }, [searchParams, isOpen])
+  }, [searchParams])
   
   return (
     <div style={{ height: '100vh' }}>
@@ -76,13 +76,21 @@ function ProfilePage() {
           </p>
         </div>
         <div className="products-wrapper">
-          <div> <h1 className="adjustedFont" style={{ color: 'grey' }}>{account?.accountType === 'SELLER' ?  'Product Listings' : 'Bookmarked Products'}</h1>
+          <div> 
+            <h1 className="adjustedFont" style={{ color: 'grey' }}>
+              {account?.accountType === 'SELLER' ?  'Product Listings' : 'Bookmarked Products'}
+            </h1>
             <div className="products-container-profile">
               {account?.products
-              ? account?.products.map((product, index) => (
-                  <ProductListingTile product={product} key={index} />
-                )) 
-              : <p className="adjustedFont" style={{ marginLeft: 5 }}>{`No ${account?.accountType === 'BUYER' ? 'Saved Products' : 'Product Listings'}`}</p>}
+                ? account?.products.map((product, index) => (
+                  <span key={index}>
+                    <ProductListingTile product={product} />
+                  </span>
+                  )) 
+                : <p className="adjustedFont" style={{ marginLeft: 5 }}>
+                    {`No ${account?.accountType === 'BUYER' ? 'Saved Products' : 'Product Listings'}`}
+                  </p>
+              }
             </div>
           </div>
         </div>

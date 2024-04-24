@@ -23,7 +23,6 @@ function EditProfile({
       bio: bio === '' ? account?.bio : bio,
       profilePicture: profilePicture ? URL.createObjectURL(profilePicture) : null
     };
-    console.log(updatedAccount)
     await accountClient.updateProduct(updatedAccount)
     onClose();
   };
