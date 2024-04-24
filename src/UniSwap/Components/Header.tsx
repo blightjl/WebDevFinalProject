@@ -19,7 +19,7 @@ export default function Header(
     products: [],
     bio: "I love to sell things",
     profileType: 'SELLER',
-    _id: 1,
+    id: -1,
   });
   
   useEffect(() => {
@@ -39,21 +39,42 @@ export default function Header(
     };
   }, []);
 
+  const logout = async (event : any) => {
+    event.preventDefault();
+    console.log("LOG OUT")
+    try {
+        // console.log(" YOU ARE NOW LOGGING IN...")
+        await client.logout();
+        // console.log(response)
+        console.log("LOGGING OUT!");
+        navigate("/login");
+    } catch (error) {
+        console.log(error);
+        console.log("FAILED LOGGING OUT");
+        // alert(error);
+    }
+};
+
   const HomeIcon = (
     <Link to="/home">
-      <div 
-        className="home-icon"
-      >
-        <img alt='home icon' src={marketPlace} className="home-icon-image"/>
+      <div className="home-icon">
+        <img alt='home icon' src={marketPlace} className="home-icon-image"/><br/>
+        {user.id != -1 && 
+      <div className="account-button">
+        <button className="adjustedFont" type="button"  onClick={logout}>
+                        <strong>Logout</strong>
+                    </button>
+      </div>
+    }
       </div>
     </Link>
   );
 
   const AccountButton = (
-    <Link to={user._id === 1 ? '/login' : `/profile/?profileId=${user._id}`}>
+    <Link to={user.id === -1 ? '/login' : `/profile/?profileId=${user.id}`}>
       <div className="account-button">
         <h2 className="adjustedFont" style={{ margin: 0, padding: 0, textDecoration: 'none' }}>
-          {user._id === 1 ? 'Log In' : user.username}
+          {user.id === -1 ? 'Log In' : user.username}
         </h2>
       </div>
     </Link>
@@ -65,7 +86,7 @@ export default function Header(
   }
 
   const openProductModal = () => {
-    if(user._id !== 1) {
+    if(user.id !== -1) {
       onOpen();
     } else {
       alert('Must Log in First');

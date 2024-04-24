@@ -10,7 +10,7 @@ const accountTypes = ['BUYER', 'SELLER', 'ADMIN', 'USER'];
 function Register() {
   const [error, setError] = useState("");
   const [account, setAccount] = useState({
-    _id: "",
+    id: -1,
     username: "",
     email: "", 
     password: "",
@@ -28,6 +28,11 @@ function Register() {
 
   const register = async () => {
     try {
+      setAccount(prevAccount => ({
+        ...prevAccount,
+        id: Date.now()
+      }));
+    //   console.log(account, account.id = Date.now());
       console.log(account);
       await client.register(account);
       // navigate("/");

@@ -7,7 +7,7 @@ import "../ColorScheme.css";
 import Header from "../Components/Header";
 
 function Homepage() {
-    const [credentials, setCredentials] = useState<Account>({ _id: "",
+    const [credentials, setCredentials] = useState<Account>({ id: -1,
         username: "",
         email: "",
         password: "",
@@ -27,7 +27,7 @@ function Homepage() {
             navigate("/home");
         } catch (error) {
             console.log(error);
-            console.log("FAILED LOGGING IN LMAO");
+            console.log("FAILED LOGGING IN");
             // alert(error);
         }
     };
